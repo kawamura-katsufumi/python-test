@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body>
+        {% include "plac1/_var.html" %}
+
+        {% block main %}{% endblock %}
+
+        {% include "plac1/_footer.html" %}
+    </body>
+</html>
