@@ -4,6 +4,7 @@
 
     </head>
     <body>
+        <!--　名前基準　-->
         <table border="1" style="border-collapse: collapse">
             <tr>
                 <th>名前</th>
@@ -22,5 +23,19 @@
             </tr>
             {% endfor %}
     </table>
+    <br>
+    <!--　クラブ基準　-->
+    <table border="1" style="border-collapse: collapse">
+        <tr>
+            <th>クラブ</th>
+            <th>名前</th>
+        </tr>
+        {% for item in clubs %}
+        <tr>
+            <td>{{item.club}}</td>
+            <td>{{item.name2.name}}</td>
+        </tr>
+        {% endfor %}
+</table>
     </body>
 </html>
