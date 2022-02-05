@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'plac1',
+    'plac2',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,16 @@
 {% extends "plac1/_base.html" %}
+{% load humanize %}
 
 {% block main %}
 
 <h1>Goodbye</h1>
+
+現在（{% now "Y-m-d H:i" %}）までに{{num | intcomma}}個作りました。
+
+<ul>
+    {% for i in skills %}
+    <li>{{i}}</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

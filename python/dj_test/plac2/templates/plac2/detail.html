@@ -1,0 +1,17 @@
+{% extends "plac2/_base.html" %}
+
+{% block main %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h3 class="card-title">品番：{{item.hinban}}</h3>
+      <h5 class="card-title">在庫：{{item.zaiko}}</h5>
+      <h5 class="card-title">カテゴリ：{{item.category}}</h5>
+      <h6 class="card-title">登録日：{{item.toroku}}</h6>
+      <h6 class="card-title">更新日：{{item.koshin}}</h6>
+      <p class="card-text">{{item.memo | linebreaks}}</p>
+      <a href="{% url 'list' %}" class="btn btn-primary">一覧</a>
+    </div>
+  </div>
+
+{% endblock %}

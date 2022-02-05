@@ -1,7 +1,18 @@
 {% extends "plac1/_base.html" %}
+{% load static %}
 
 {% block main %}
 
 <h1>Hello</h1>
+
+{% if username == "川村" %}
+<h2>自分です</h2>
+{% elif username %}
+<h2>{{username}}さん</h2>
+{% else %}
+<h2>名無しさん</h2>
+{% endif %}
+
+<img src="{% static '111.jpg' %}" alt="">
 
 {% endblock %}
