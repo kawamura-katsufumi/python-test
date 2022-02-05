@@ -23,3 +23,13 @@ def create(request):
 def delete(request,pk):
     Test.objects.get(pk=pk).delete()
     return redirect("list")
+
+def update(request,pk):  
+    ins=Test.objects.get(pk=pk)
+    form=Testform(instance=ins)
+    if request.method == "POST":
+        form=Testform(request.POST,instance=ins)
+        if form.is_valid():
+            form.save()
+            return redirect("list")
+    return render(request,"plac2/update.html",{"form":form,"ins":ins})
