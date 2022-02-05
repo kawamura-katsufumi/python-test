@@ -1,6 +1,6 @@
 from django.urls import path
-# from .views import 
+from .views import omote
 
 urlpatterns = [
-    # path('list/',list,name="list"),
+    path('omote/',omote,name="omote"),
 ]

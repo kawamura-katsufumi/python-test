@@ -4,6 +4,23 @@
 
     </head>
     <body>
-        aaa
+        <table border="1" style="border-collapse: collapse">
+            <tr>
+                <th>名前</th>
+                <th>年齢</th>
+                <th>クラブ</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>
+                    {% for i in item.ura_set.all %}
+                    {{i.club}}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
     </body>
 </html>

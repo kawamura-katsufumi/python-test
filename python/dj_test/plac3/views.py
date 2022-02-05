@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Omote
 
-# Create your views here.
+def omote(request):
+    items=Omote.objects.all()
+    return render(request,"plac3/omote.html",{"items":items})
