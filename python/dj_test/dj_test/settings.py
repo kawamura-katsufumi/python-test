@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'plac1',
     'plac2',
+    'plac3',
 ]
 
 MIDDLEWARE = [
