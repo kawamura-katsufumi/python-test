@@ -11,7 +11,7 @@
                 <th>年齢</th>
                 <th>クラブ</th>
             </tr>
-            {% for item in items %}
+            {% for item in data %}
             <tr>
                 <td>{{item.name}}</td>
                 <td>{{item.age}}</td>
@@ -24,6 +24,24 @@
             {% endfor %}
     </table>
     <br>
+        {% if data.has_previous %}
+        <a href="{% url 'omote' %}"><button>最初へ</button></a>
+        <a href="{% url 'omote' %}{{data.previous_page_number}}"><button>前へ</button></a>
+        {% else %}
+        <button>最初へ</button>
+        <button>前へ</button>
+        {% endif %}
+
+        {{data.number}}/{{data.paginator.num_pages}}
+
+        {% if data.has_next %}
+        <a href="{% url 'omote' %}{{data.next_page_number}}"><button>次へ</button></a>
+        <a href="{% url 'omote' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
+        {% else %}
+        <button>次へ</button>
+        <button>最後へ</button>
+        {% endif %}
+    <br><br>
     <!--　クラブ基準　-->
     <table border="1" style="border-collapse: collapse">
         <tr>
@@ -37,6 +55,5 @@
         </tr>
         {% endfor %}
     </table>
-    githubテスト2
     </body>
 </html>
