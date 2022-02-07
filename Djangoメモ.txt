@@ -1,0 +1,313 @@
+■　管理サイトの設定
+
+from django.contrib import admin
+from .models import Memo
+
+class MemoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_datetime', 'updated_datetime')
+    list_display_links = ('id', 'title')
+
+admin.site.register(Memo, MemoAdmin)
+
+
+
+■　クラスのview設定
+
+from django.shortcuts import render
+from .models import Test
+from django.views.generic import ListView,DetailView,CreateView,DeleteView,UpdateView
+from django.urls import reverse_lazy
+
+class Create(CreateView):
+    template_name="create.html"
+    model=Test
+    fields=["品番","在庫","カテゴリ","メモ"]
+    success_url=reverse_lazy("list")
+
+
+■　html変数の改行タグ
+
+<div>
+  {{ memo.text | linebreaks | urlize }}
+</div>
+
+linebreaks:テキストの改行を反映して表示してくれるタグです。
+
+urlize:URLとEmailアドレスをクリック可能な状態で表示します。
+
+
+
+■　フォーム（テンプレート利用）
+
+### forms.py ###
+
+from django.forms import ModelForm
+from .models import Memo
+
+class Memoform(ModelForm):
+    class Meta:
+        model=Memo
+        fields=["タイトル","メモ"]
+
+
+### views.py ###
+
+from django.shortcuts import render,redirect
+from .models import Memo
+from .forms import Memoform
+
+def create3(request):
+    if request.method=="POST":
+        form=Memoform(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("index3")
+    else:
+        form=Memoform()
+        return render(request,"create3.html",{"form":form})
+
+
+
+def delete3(request,pk):
+    item=Memo.objects.filter(pk=pk)
+    item.delete()
+    return redirect("index3")
+
+
+
+def update3(request,pk):
+    memo=Memo.objects.get(pk=pk)
+    if request.method=="POST":
+        form=Memoform(request.POST,instance=memo)
+        if form.is_valid():
+            form.save()
+            return redirect("index3")
+    else:
+        form=Memoform(instance=memo)
+        return render(request,"update3.html",{"form":form,"memo":memo})
+
+
+## update3.html ##
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body>
+        <div><a href="{% url 'index3' %}">一覧へ戻る</a></div>
+
+    <form action="{% url 'update3' memo.pk %}" method="post">{% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn">保存</button>
+    </form>
+
+    </body>
+</html>
+
+
+------ {{form.as_p}} を分解 -----------
+
+<form action="{% url 'app:edit_memo' memo.id %}" method="POST">{% csrf_token %}
+  <table>
+    <tr>
+      <th>タイトル</th>
+      <td>{{ form.title }}</td>
+    </tr>
+    <tr>
+      <th>テキスト</th>
+      <td>{{ form.text }}</td>
+    </tr>
+  </table>
+  <button class="btn" type="submit">保存</button>
+</form>
+
+
+
+■　ページネーション
+
+○○ ファンクション　○○
+
+# views.py
+
+from django.shortcuts import render
+from .models import Test
+from django.core.paginator import Paginator
+
+
+def index(request,num=1):
+    item=Test.objects.all()
+    make_page=Paginator(item,4)
+    data=make_page.get_page(num)
+    return render(request,"index.html",{"data":data})
+
+
+# index.html
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>生徒一覧</h1>
+
+        <table border="1" style="border-collapse: collapse"><tr><th>id</th><th>名前</th><th>年齢</th><th>登録日</th></tr>
+        {% for item in data %}
+        <tr><td>{{item.id}}</td><td>{{item.名前}}</td><td>{{item.年齢}}</td><td>{{item.登録日}}</td></tr>
+        {% endfor %}
+        </table>
+
+        <br>
+        {% if data.has_previous %}
+        <a href="{% url 'index' %}"><button>最初へ</button></a>
+        <a href="{% url 'index' %}{{data.previous_page_number}}"><button>前へ</button></a>
+        {% else %}
+        <button>最初へ</button>
+        <button>前へ</button>
+        {% endif %}
+
+        {{data.number}}/{{data.paginator.num_pages}}
+        {{data}}
+
+        {% if data.has_next %}
+        <a href="{% url 'index' %}{{data.next_page_number}}"><button>次へ</button></a>
+        <a href="{% url 'index' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
+        {% else %}
+        <button>次へ</button>
+        <button>最後へ</button>
+        {% endif %}
+
+
+    </body>
+
+</html>
+
+
+# urls.py
+
+from django.urls import path
+from .views import index
+
+urlpatterns = [
+    path('', index ,name="index"),
+    path('<int:num>', index ,name="index"),
+]
+
+
+
+
+○○ クラス ○○
+
+# views.py
+
+from django.views.generic import ListView
+from .models import Article
+
+class ArticleListView(Listview):
+    template_name = 'article_list.html'
+    model = Article
+    pagenate_by = 5 # モデルの分割数を追加
+
+
+#html
+
+page_obj変数（ページネーション管理オブジェクト）でページ状態を参照
+
+
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <ul>
+        <!-- object_list は該当ページ内で有効なオブジェクトのみにフィルタされて渡される-->
+        {% for article in object_list %} 
+            <li>{{ article.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- ページネーション用のUI -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <!-- 現在よりも前のページが存在する場合 -->
+                <a href="?page=1">&laquo; 先頭</a>
+                <a href="?page={{ page_obj.previous_page_number }}">前へ</a>
+            {% endif %}
+
+            <span class="current">
+                <!-- 現在のページ番号と、全ページ数を表示 -->
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <!-- 現在よりも後のページが存在する場合 -->
+                <a href="?page={{ page_obj.next_page_number }}">次へ</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
+
+
+
+
+
+■　リレーション
+
+# models.py
+
+from django.db import models
+from django.db.models.deletion import CASCADE
+
+class Test(models.Model):
+    name=models.CharField(verbose_name="名前",max_length=10)
+    age=models.IntegerField(verbose_name="年齢")
+
+    def __str__(self):
+        return self.name
+
+
+class Test2(models.Model):
+    name2=models.ForeignKey(Test,verbose_name="連携名",max_length=10,on_delete=CASCADE)
+    club=models.CharField(verbose_name="クラブ",max_length=10)
+
+    def __str__(self):
+        return self.club
+
+
+# index.html（Test側　主テーブル　親　foreignkeyなし側）
+
+<table border="1">
+    {% for item in items %}
+    <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.age}}</td>
+        <td>{% for cu in item.test2_set.all %}　　←　インスタンス . 子モデル名（小文字で）_set.all
+                {{cu.club}}　　　　　　　　　　　←　取り出し（子側の欲しいフィールド）
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+※classは頭文字が大文字だが、指定するときは小文字で指定！
+
+
+
+# index2.html（Test2側　従テーブル　子　ForeignKey記載側）
+
+table border="1">
+    {% for item in items %}
+    <tr>
+        <td>{{item.club}}</td>
+        <td>{{item.name2.name}}　←　インスタンス . ForeignKeyを設定したフィールド名 . 欲しい（親テーブルの）フィールド
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
