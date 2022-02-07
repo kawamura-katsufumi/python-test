@@ -62,10 +62,10 @@
             <th>クラブ</th>
             <th>名前</th>
         </tr>
-        {% for item in clubs %}
+        {% for key,value in data2.items %}
         <tr>
-            <td>{{item.club}}</td>
-            <td>{{item.name2.name}}</td>
+            <td>{{key}}</td>
+            <td>{{value}}</td>
         </tr>
         {% endfor %}
     </table>
