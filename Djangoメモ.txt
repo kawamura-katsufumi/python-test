@@ -310,4 +310,195 @@ table border="1">
 </table>
 
 
+■　1ページに複数フォーム（モデル更新と一覧表示＜ページネーション＞）
+
+# models.py
+
+from django.db import models
+from django.db.models.deletion import CASCADE
+
+class Omote(models.Model):
+    name=models.CharField(max_length=10,verbose_name="名前")
+    age=models.IntegerField(verbose_name="年齢")
+
+    def __str__(self):
+        return self.name
+
+
+class Ura(models.Model):
+    name2=models.ForeignKey(Omote,on_delete=CASCADE,verbose_name="連携名")
+    club=models.CharField(max_length=10,verbose_name="クラブ")
+
+    def __str__(self):
+        return self.club
+
+# forms.py
+
+from django.db.models import fields
+from django.forms import ModelForm
+from .models import Omote,Ura
+
+class Omote_form(ModelForm):
+    class Meta:
+        model=Omote 　　#　←　modelが正解。Modelはダメ。大文字と小文字に注意！
+        fields=["name","age"]
+
+
+class Ura_form(ModelForm):
+    class Meta:
+        model=Ura
+        fields=["name2","club"]
+
+
+# views.py
+
+from django.shortcuts import redirect, render
+from .models import Omote,Ura
+from django.core.paginator import Paginator
+from .forms import Omote_form,Ura_form
+
+def omote(request,num=1):
+    
+    items=Omote.objects.all()
+    pagen=Paginator(items,4)
+    data=pagen.get_page(num)
+    form1=Omote_form()
+    form2=Ura_form()
+
+    params={
+        "data":data,
+        "form1":Omote_form(),
+        "form2":Ura_form(),
+    }
+
+    return render(request,"omote.html",params)
+
+
+def omote1(request):
+    form1=Omote_form(request.POST)
+    form1.save()
+    return redirect("omote")
+
+
+def omote2(request):
+    form2=Ura_form(request.POST)
+    form2.save()
+    return redirect("omote")
+
+
+def ura(request):
+    items=Ura.objects.all()
+    return render(request,"ura.html",{"data":items})
+
+
+# urls.py
+
+from django.urls import path
+from .views import omote, omote1,omote2,ura
+
+urlpatterns = [
+    path('', omote , name="omote"),
+    path('<int:num>/', omote , name="omote"),
+    path('omote1/',omote1 , name="omote1"),
+    path('omote2/',omote2 , name="omote2"),
+    path('ura/', ura , name="ura"),
+]
+
+
+#omote.html
+
+<p><a href="{% url 'ura' %}">クラブ一覧</a></p>
+
+<form action="{% url 'omote1' %}" method="post">{% csrf_token %}
+    {{form1.as_p}}
+    <button type="submit">送信</button>
+</form>
+<hr>
+
+<form action="{% url 'omote2' %}" method="post">{% csrf_token %}
+    {{form2.as_p}}
+    <button type="submit">送信</button>
+</form>
+<hr><br>
+
+<table border="1" style="border-collapse: collapse">
+    <tr>
+        <th>名前</th>
+        <th>年齢</th>
+        <th>クラブ</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.age}}</td>
+        <td>
+            {% for i in item.ura_set.all %}
+            {{i.club}}
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ページネーション-->
+<br>
+{% if data.has_previous %}
+<a href="{% url 'omote' %}"><button>最初へ</button></a>
+<a href="{% url 'omote' %}{{data.previous_page_number}}"><button>前へ</button></a>
+{% else %}
+<button>最初へ</button>
+<button>前へ</button>
+{% endif %}
+
+ページ：{{data.number}}/{{data.paginator.num_pages}}
+
+{% if data.has_next %}
+<a href="{% url 'omote' %}{{data.next_page_number}}"><button>次へ</button></a>
+<a href="{% url 'omote' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
+{% else %}
+<button>次へ</button>
+<button>最後へ</button>
+{% endif %}
+
+
+# ura.html
+
+<p><a href="{% url 'omote' %}">なまえ一覧</a></p>
+
+<table border="1" style="border-collapse: collapse">
+    <tr>
+        <th>クラブ</th>
+        <th>名前</th>
+        <th>年齢</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{item.club}}</td>
+        <td>{{item.name2.name}}</td>
+        <td>{{item.name2.age}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+■通常フォームとモデルフォームの合体
+
+# views.py
+
+def omote_post(request,num=1):
+    form=Omoteform(request.POST)
+    form.save()
+    
+    items=Omote.objects.all()
+    page=Paginator(items,4)
+    params={
+        "data":page.get_page(num),
+        "form1":Omoteform(),
+        "form2":Uraform(),
+        "name":request.POST["name"],
+        "age":request.POST["age"],
+    }
+    return render(request,"omote.html",params)
+
+  
 
