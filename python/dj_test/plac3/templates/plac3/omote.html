@@ -4,7 +4,20 @@
 
     </head>
     <body>
+        <!-- 名前フォーム -->
+        <form action="{% url 'name' %}" method="post">{% csrf_token %}
+            {{form1.as_p}}
+            <button type="submit">追加</button>
+        </form>
+        <br><hr>
+        <!-- クラブフォーム -->
+        <form action="{% url 'club' %}" method="post">{% csrf_token %}
+            {{form2.as_p}}
+            <button type="submit">追加</button>
+        </form>
+        <br><hr>
         <!--　名前基準　-->
+        <h2>名前基準</h2>
         <table border="1" style="border-collapse: collapse">
             <tr>
                 <th>名前</th>
@@ -41,8 +54,9 @@
         <button>次へ</button>
         <button>最後へ</button>
         {% endif %}
-    <br><br>
+    <br><br><hr>
     <!--　クラブ基準　-->
+    <h2>クラブ基準</h2>
     <table border="1" style="border-collapse: collapse">
         <tr>
             <th>クラブ</th>
