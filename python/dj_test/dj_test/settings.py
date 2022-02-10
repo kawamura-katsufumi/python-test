@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'plac1',
     'plac2',
     'plac3',
+    'plac4',
 ]
 
 MIDDLEWARE = [
