@@ -42,3 +42,9 @@ def club(request):
     if form.is_valid():
         form.save()
         return redirect("omote")
+
+def omote_test(request):
+    test1=request.POST["test_name"]
+    test2=request.POST["test_age"]
+    Omote.objects.create(name=test1,age=test2)
+    return redirect("omote")

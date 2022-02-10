@@ -501,4 +501,45 @@ def omote_post(request,num=1):
     return render(request,"omote.html",params)
 
   
+■　HTMLのフォームを使ったmodelへの直接保存（HTML側でバリデーション）
+
+＜入力直後のバリデーションを重視する場合＞
+※Modelform や forms.Form　で作成するより、HTML側でのバリデーションが簡単かも
+
+# views.py（HTML側で入力直後のバリデーションを行う場合）
+
+def omote_test(request):
+    test1=request.POST["test_name"]　
+    test2=request.POST["test_age"]　・・・HTML側でname属性を指定をしておく
+    Omote.objects.create(name=test1,age=test2) 　# モデル名.objects.create()で直接書き込む。※forms.py は不要
+    return redirect("omote")
+
+
+# html
+
+<!--  Modelform や forms.Form の場合-->
+<form action="{% url 'name' %}" method="post">{% csrf_token %}
+    {{form1.as_p}} 　※分解しても{{form1.name}}などで、ここではバリデーション設定ができない。
+    <button type="submit">追加</button>
+</form>
+<br><hr>
+
+<!--  HTML側でバリデーション   -->
+<form action="{% url 'name' %}" method="post">{% csrf_token %}
+    <label for="test1">名前：</label>
+    <input type="text" id="test1" name="test_name" required>  ※必須にする場合
+
+    <label for="test2">年齢：</label>
+    <input type="number" id="test2" name="test_age" min=0 max=60 required>　※必須、0以上60以下
+
+    <button type="submit">追加</button>
+</form>
+
+【結果】
+内容による。
+integer指定はforms.pyでの指定が面倒だが、
+required程度ならform側で指定した方がforms.Formで指定できるので楽かも。HTML側のコードも楽。
+
+※どのフォームを使うかで、HTMLかforms.pyで validするかを考えるべき。
+※models.pyでのvalid指定は、一度POSTされてからになるので（.is_valid()）結果が404で返ってきてしまう。
 
