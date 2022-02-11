@@ -592,3 +592,30 @@ required程度ならform側で指定した方がforms.Formで指定できるの�
     ・・・　ページネーション系のコード
 
 </div>
+
+
+＜ページネーション＞
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        
+    {% if data.has_previous %}
+        <li class="page-item"><a class="page-link" href="{% url 'omote' %}">最初へ</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'omote' %}{{data.previous_page_number}}">前へ</a></li>
+    {% else %}
+        <li class="page-item"><a class="page-link" pointer-events: none;>最初へ</a></li>
+        <li class="page-item"><a class="page-link" pointer-events: none;>前へ</a></li>
+    {% endif %}
+
+    <li class="page-item"><a class="page-link" pointer-events: none;>{{data.number}}/{{data.paginator.num_pages}}</a></li>
+    
+    {% if data.has_next %}
+        <li class="page-item"><a class="page-link" href="{% url 'omote' %}{{data.next_page_number}}">次へ</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'omote' %}{{data.paginator.num_pages}}">最後へ</a></li>
+    {% else %}
+        <li class="page-item"><a class="page-link" pointer-events: none;>次へ</a></li>
+        <li class="page-item"><a class="page-link" pointer-events: none;>最後へ</a></li>
+    {% endif %}
+
+    </ul>
+</nav>
