@@ -62,9 +62,10 @@
                 </tbody>
             </table>
 
+            <!-- ＜bootstrapバージョン＞ -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    
+
                 {% if data.has_previous %}
                   <li class="page-item"><a class="page-link" href="{% url 'omote' %}">最初へ</a></li>
                   <li class="page-item"><a class="page-link" href="{% url 'omote' %}{{data.previous_page_number}}">前へ</a></li>
@@ -87,25 +88,29 @@
               </nav>
 
             <br>
-            {% if data.has_previous %}
-            <a href="{% url 'omote' %}"><button>最初へ</button></a>
-            <a href="{% url 'omote' %}{{data.previous_page_number}}"><button>前へ</button></a>
-            {% else %}
-            <button>最初へ</button>
-            <button>前へ</button>
-            {% endif %}
+            <!--
+                ＜通常バージョン＞ 
+                {% if data.has_previous %}
+                <a href="{% url 'omote' %}"><button>最初へ</button></a>
+                <a href="{% url 'omote' %}{{data.previous_page_number}}"><button>前へ</button></a>
+                {% else %}
+                <button>最初へ</button>
+                <button>前へ</button>
+                {% endif %}
 
-            {{data.number}}/{{data.paginator.num_pages}}
+                {{data.number}}/{{data.paginator.num_pages}}
 
-            {% if data.has_next %}
-            <a href="{% url 'omote' %}{{data.next_page_number}}"><button>次へ</button></a>
-            <a href="{% url 'omote' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
-            {% else %}
-            <button>次へ</button>
-            <button>最後へ</button>
-            {% endif %}
+                {% if data.has_next %}
+                <a href="{% url 'omote' %}{{data.next_page_number}}"><button>次へ</button></a>
+                <a href="{% url 'omote' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
+                {% else %}
+                <button>次へ</button>
+                <button>最後へ</button>
+                {% endif %}
+            -->
+        
         </div>
-            
+           
         <br><br><hr>
         <!--　クラブ基準　-->
         <h2>クラブ基準</h2>
