@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+        <style>
+            .test1{
+                background-color: lightblue;
+            }
+        </style>
     </head>
     <body>
         <!-- 名前フォーム -->
@@ -14,8 +20,8 @@
         <form action="{% url 'omote_test' %}" method="post">{% csrf_token %}
             <p><label for="test1">名前:</label>
             <input type="text" id="test1" name="test_name" required></p>
-            <label for="test2">年齢:</label>
-            <input type="number" id="test2" name="test_age" min=0 max=60 required>
+            <p><label for="test2">年齢:</label>
+            <input type="number" id="test2" name="test_age" min=0 max=60 required></p>
             <p><button type="submit">直接追加</button></p>
             
         </form>
@@ -27,59 +33,66 @@
         </form>
         <br><hr>
         <!--　名前基準　-->
-        <h2>名前基準</h2>
+        <div class="container">
+            <h2>名前基準</h2>
+            <table class="table table-striped table-bordered" style="width: 30%">
+                <thead class="test1">
+                <tr>
+                    <th style="width: auto">名前</th>
+                    <th style="width: auto">年齢</th>
+                    <th style="width: auto">クラブ</th>
+                    <th style="width: auto"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>{{item.age}}</td>
+                    <td>
+                        {% for i in item.ura_set.all %}
+                        {{i.club}}
+                        {% endfor %}
+                    </td>
+                    <td align="center"><a href="{% url 'delete' item.pk %}">削除</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            {% if data.has_previous %}
+            <a href="{% url 'omote' %}"><button>最初へ</button></a>
+            <a href="{% url 'omote' %}{{data.previous_page_number}}"><button>前へ</button></a>
+            {% else %}
+            <button>最初へ</button>
+            <button>前へ</button>
+            {% endif %}
+
+            {{data.number}}/{{data.paginator.num_pages}}
+
+            {% if data.has_next %}
+            <a href="{% url 'omote' %}{{data.next_page_number}}"><button>次へ</button></a>
+            <a href="{% url 'omote' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
+            {% else %}
+            <button>次へ</button>
+            <button>最後へ</button>
+            {% endif %}
+        </div>
+            
+        <br><br><hr>
+        <!--　クラブ基準　-->
+        <h2>クラブ基準</h2>
         <table border="1" style="border-collapse: collapse">
             <tr>
-                <th>名前</th>
-                <th>年齢</th>
                 <th>クラブ</th>
-                <th></th>
+                <th>名前</th>
             </tr>
-            {% for item in data %}
+            {% for key,value in data2.items %}
             <tr>
-                <td>{{item.name}}</td>
-                <td>{{item.age}}</td>
-                <td>
-                    {% for i in item.ura_set.all %}
-                    {{i.club}}
-                    {% endfor %}
-                </td>
-                <td><a href="{% url 'delete' item.pk %}">削除</a></td>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
             </tr>
             {% endfor %}
-    </table>
-    <br>
-        {% if data.has_previous %}
-        <a href="{% url 'omote' %}"><button>最初へ</button></a>
-        <a href="{% url 'omote' %}{{data.previous_page_number}}"><button>前へ</button></a>
-        {% else %}
-        <button>最初へ</button>
-        <button>前へ</button>
-        {% endif %}
-
-        {{data.number}}/{{data.paginator.num_pages}}
-
-        {% if data.has_next %}
-        <a href="{% url 'omote' %}{{data.next_page_number}}"><button>次へ</button></a>
-        <a href="{% url 'omote' %}{{data.paginator.num_pages}}"><button>最後へ</button></a>
-        {% else %}
-        <button>次へ</button>
-        <button>最後へ</button>
-        {% endif %}
-    <br><br><hr>
-    <!--　クラブ基準　-->
-    <h2>クラブ基準</h2>
-    <table border="1" style="border-collapse: collapse">
-        <tr>
-            <th>クラブ</th>
-            <th>名前</th>
-        </tr>
-        {% for key,value in data2.items %}
-        <tr>
-            <td>{{key}}</td>
-            <td>{{value}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+        </table>
     </body>
 </html>
