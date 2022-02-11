@@ -33,6 +33,7 @@
                 <th>名前</th>
                 <th>年齢</th>
                 <th>クラブ</th>
+                <th></th>
             </tr>
             {% for item in data %}
             <tr>
@@ -43,6 +44,7 @@
                     {{i.club}}
                     {% endfor %}
                 </td>
+                <td><a href="{% url 'delete' item.pk %}">削除</a></td>
             </tr>
             {% endfor %}
     </table>

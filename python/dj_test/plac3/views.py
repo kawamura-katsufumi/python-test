@@ -48,3 +48,7 @@ def omote_test(request):
     test2=request.POST["test_age"]
     Omote.objects.create(name=test1,age=test2)
     return redirect("omote")
+
+def delete(request,pk):
+    Omote.objects.get(pk=pk).delete()
+    return redirect("omote")
