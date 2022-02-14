@@ -1,5 +1,9 @@
 {% extends "plac4/base.html" %}
 
 {% block content %}
-<h2>トップページ21</h2>
+<h2>トップページ</h2>
+
+{% for photo in photos %}
+    <img src="{{photo.image.url}}" class="photo-img">
+{% endfor %}
 {% endblock %}
