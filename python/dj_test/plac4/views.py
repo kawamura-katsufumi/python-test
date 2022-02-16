@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from .models import Photo
+from .models import Photo,Category
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
 from django.contrib import messages
+from django.views.decorators.http import require_POST
 
 
 def index(request):
@@ -46,3 +47,16 @@ def photos_new(request):
         form=PhotoForm()
     return render(request,"plac4/photos_new.html",{"form":form})
 
+def photos_detail(request,pk):
+    photo=Photo.objects.get(pk=pk)
+    return render(request,"plac4/photos_detail.html",{"photo":photo})
+
+@require_POST
+def photos_delete(request,pk):
+    Photo.objects.get(pk=pk,user=request.user).delete()
+    return redirect("users_detail",pk=request.user.pk)
+
+def photos_category(request,category):
+    category=Category.objects.get(title=category)
+    photos=Photo.objects.filter(category=category).order_by("-created_at")
+    return render(request,"plac4/index.html",{"category":category,"photos":photos})
