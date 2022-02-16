@@ -1,0 +1,24 @@
+{% extends "plac4/base.html" %}
+
+{% block content %}
+<h2>ユーザー登録</h2>
+
+<form action="{% url 'signup' %}" method="post">{% csrf_token %}
+    <label for="">ユーザー名</label>
+    {{form.username}}
+    {{form.username.errors}}
+    <br>
+    <label for="">パスワード</label>
+    {{form.password1}}
+    {{form.password1.errors}}
+    <br>
+    <label for="">パスワード（確認）</label>
+    {{form.password2}}
+    {{form.password2.errors}}
+    <br>
+    <input type="submit" value="登録する">
+</form>
+
+<p><a href="{% url 'login' %}">ログインはこちら</a></p>
+
+{% endblock %}
