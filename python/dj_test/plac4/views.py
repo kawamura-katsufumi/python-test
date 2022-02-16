@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 from .forms import PhotoForm
+from django.contrib import messages
 
 
 def index(request):
@@ -33,13 +34,15 @@ def signup(request):
 
 @login_required
 def photos_new(request):
-    if request.POST == "POST":
+    if request.method == "POST":
         form=PhotoForm(request.POST,request.FILES)
         if form.is_valid():
             photo=form.save(commit=False)
             photo.user=request.user
             photo.save()
+            messages.success(request,"投稿が完了しました！")
         return redirect("users_detail",pk=request.user.pk)
     else:
         form=PhotoForm()
     return render(request,"plac4/photos_new.html",{"form":form})
+
