@@ -21,7 +21,7 @@ def add(request,pk):
         # if item.hinban not in request.session["sample"]:
 
         #     # print(request.session["sample"])
-        request.session["sample"][item.hinban]="1"
+        request.session["sample"]=1
         
         
         print(request.session["sample"])
