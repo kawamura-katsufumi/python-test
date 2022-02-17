@@ -8,6 +8,25 @@
     <title>セッションテスト</title>
 </head>
 <body>
-    
+    <div class="container mt-5" style="width: 70%">
+    <table class="table table-bordered">
+        <tr>
+            <th>品番</th>
+            <th>品名</th>
+            <th>カラー</th>
+            <th>サイズ</th>
+            <th></th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{item.hinban}}</td>
+            <td>{{item.hinmei}}</td>
+            <td>{{item.color}}</td>
+            <td>{{item.size}}</td>
+            <td><a href="{% url 'add' item.pk %}"><button type="button" class="btn btn-secondary btn-sm">追加</button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
 </body>
 </html>
