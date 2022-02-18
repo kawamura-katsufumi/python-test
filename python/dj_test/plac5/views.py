@@ -20,7 +20,7 @@ def add(request,pk):
         # if item.hinban not in request.session["sample"]:
 
         #     # print(request.session["sample"])
-        request.session["sample"][item.hinban]=1
+        request.session["sample"][str(item.id)]=1
         
         
         print(request.session["sample"])
@@ -29,7 +29,7 @@ def add(request,pk):
 
     else:
         print("なし")
-        request.session["sample"]={item.hinban:1}
+        request.session["sample"]={str(item.id):1}
 
         print(request.session["sample"])
         
@@ -40,3 +40,17 @@ def delete(request):
     del request.session['sample']
     print("削除OK")
     return redirect("index")
+
+
+def send(request):
+    all_id=request.session.get("sample",{})
+    context={}
+    for key,value in all_id.items():
+        data=Session.objects.get(id=key)
+        context[key]={
+        "hinban":data.hinban,
+        "hinmei":data.hinmei,
+        "color":data.color,
+        "size":data.size,
+        }
+    return render(request,"plac5/send.html",{"context":context})
