@@ -17,7 +17,7 @@
                 <td>{{value.hinmei}}</td>
                 <td>{{value.color}}</td>
                 <td>{{value.size}}</td>
-                <td><a href=""><button type="button" class="btn btn-secondary btn-sm">削除</button></a></td>
+                <td><a href="{% url 'send_delete' pk=key %}"><button type="button" class="btn btn-secondary btn-sm">削除</button></a></td>
             </tr>
             {% endfor %}
         </table>

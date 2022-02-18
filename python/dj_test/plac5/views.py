@@ -37,7 +37,7 @@ def add(request,pk):
 
 
 def delete(request):
-    del request.session['sample']
+    del request.session["sample"]
     print("削除OK")
     return redirect("index")
 
@@ -54,3 +54,8 @@ def send(request):
         "size":data.size,
         }
     return render(request,"plac5/send.html",{"context":context})
+
+def send_delete(request,pk):
+    print(pk)
+    del request.session["sample"][str(pk)]
+    return redirect("send")
