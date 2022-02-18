@@ -14,33 +14,30 @@ def add(request,pk):
     item=Session.objects.get(pk=pk)
 
     if "sample" in request.session:
-        
+
+        if str(item.id) in request.session["sample"]:
+            messages.warning(request,"既に追加されています！")
+            return redirect("index")
+        else:
+            request.session["sample"][str(item.id)]=1
+            messages.success(request,"サンプルを追加しました！")
+            return redirect("index")
+                
         # print(request.session["sample"])
 
-        # # print("あり")
-        # if item.hinban not in request.session["sample"]:
-
-        #     # print(request.session["sample"])
-        request.session["sample"][str(item.id)]=1
-        
-        
-        print(request.session["sample"])
-
-
-
     else:
-        print("なし")
         request.session["sample"]={str(item.id):1}
 
-        print(request.session["sample"])
+        # print(request.session["sample"])
     
-    messages.success(request,"サンプルを追加しました！")
+        messages.success(request,"サンプルを追加しました！")
+
     return redirect("index")
 
 
 def delete(request):
     del request.session["sample"]
-    print("削除OK")
+    # print("削除OK")
     return redirect("index")
 
 
@@ -58,6 +55,5 @@ def send(request):
     return render(request,"plac5/send.html",{"context":context})
 
 def send_delete(request,pk):
-    print(pk)
     del request.session["sample"][str(pk)]
     return redirect("send")

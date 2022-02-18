@@ -2,9 +2,15 @@
 
 {% block main %}
 <div class="container mt-5" style="width: 70%">
+
     {% for message in  messages %}
-    <div class="alert alert-success" role="alert">{{message}}</div>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="alert alert-success" role="alert">{{message}}</div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+        {% endif %}
     {% endfor %}
+    
     <p><a href="{% url 'delete' %}">セッション削除</a></p>
     <table class="table table-bordered">
         <tr>
