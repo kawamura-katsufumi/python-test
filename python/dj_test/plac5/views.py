@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Session
+from django.contrib import messages
 
 def index(request):
     items=Session.objects.all()
@@ -32,7 +33,8 @@ def add(request,pk):
         request.session["sample"]={str(item.id):1}
 
         print(request.session["sample"])
-        
+    
+    messages.success(request,"サンプルを追加しました！")
     return redirect("index")
 
 
