@@ -33,3 +33,11 @@ class Sample(models.Model):
 
     def __str__(self):
         return str(self.sample_number)
+
+#所属
+class Shozoku(models.Model):
+    name=models.CharField("担当",max_length=10)
+    busho=models.CharField("部署",max_length=10)
+
+    def __str__(self):
+        return str(self.name)

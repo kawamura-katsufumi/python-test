@@ -2,7 +2,10 @@
 
 {% block main %}
 <div class="container mt-5" style="width: 70%">
-    
+    <div><a href="{% url 'login' %}">ログイン</a>
+    <a href="{% url 'logout' %}">ログアウト</a>
+    </div>
+    <br><br>
     <p>@{{request.user}}</p>
 
     {% for message in  messages %}

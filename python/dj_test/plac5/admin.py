@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Session,Send,Sample
+from .models import Session,Send,Sample,Shozoku
 from django.contrib.admin import ModelAdmin
 
 class All(ModelAdmin):
@@ -11,6 +11,10 @@ class All2(ModelAdmin):
 class All3(ModelAdmin):
     list_display = ["sample_number","hinban","hinmei","color","size"]
 
+class All4(ModelAdmin):
+    list_display = ["name","busho"]
+
 admin.site.register(Session,All)
 admin.site.register(Send,All2)
 admin.site.register(Sample,All3)
+admin.site.register(Shozoku,All4)
