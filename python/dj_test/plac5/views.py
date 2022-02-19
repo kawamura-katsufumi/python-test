@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import Session
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     items=Session.objects.all()

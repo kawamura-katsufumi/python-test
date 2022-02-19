@@ -2,6 +2,8 @@
 
 {% block main %}
 <div class="container mt-5" style="width: 70%">
+    
+    <p>@{{request.user}}</p>
 
     {% for message in  messages %}
         {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
