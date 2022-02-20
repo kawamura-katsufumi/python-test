@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
-from .models import Session,Shozoku
+from .models import Session,Shozoku,Send
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 from .forms import Sendform
+from django.db.models import Max
 
 def index(request):
     items=Session.objects.all()
@@ -62,4 +63,10 @@ def send(request):
 
 def send_delete(request,pk):
     del request.session["sample"][str(pk)]
+    return redirect("send")
+
+def kakutei(request):
+    num=Send.objects.all().aggregate(Max("sample_number"))
+    x=num["sample_number__max"]
+    print(x+1)
     return redirect("send")
