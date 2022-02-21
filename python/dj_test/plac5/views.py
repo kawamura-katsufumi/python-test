@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Session,Shozoku,Send
+from .models import Session,Shozoku,Send,Sample
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
@@ -68,5 +68,25 @@ def send_delete(request,pk):
 def kakutei(request):
     num=Send.objects.all().aggregate(Max("sample_number"))
     x=num["sample_number__max"]
-    print(x+1)
-    return redirect("send")
+    #届け先 
+    Send.objects.create(
+        sample_number=x+1,
+        busho=Shozoku.objects.get(name=request.user).busho,
+        name=request.user,
+        send_name=request.POST["send_name"],
+        send_tel=request.POST["send_tel"]
+        )
+
+    # #サンプル内容
+    all_id=request.session.get("sample",{})
+    for key,value in all_id.items():
+        data=Session.objects.get(id=key)
+        Sample.objects.create(
+            sample_number=x+1,
+            hinban=data.hinban,
+            hinmei=data.hinmei,
+            color=data.color,
+            size=data.size
+        )
+    del request.session["sample"]
+    return redirect("index")
