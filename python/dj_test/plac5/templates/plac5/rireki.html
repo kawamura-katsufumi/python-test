@@ -1,0 +1,27 @@
+{% extends "plac5/base.html" %}
+
+{% block main %}
+<div class="container mt-5" style="width: 70%">
+    <p>@{{request.user}}</p>
+    {% for item in items %}
+    <table>
+        <tr>
+            <td>■部署：{{item.busho}}　担当者：{{item.name}}　送付先：{{item.send_name}}　連絡先：{{item.send_tel}}</td>
+        </tr>
+        <tr>
+            <table class="table table-bordered">
+                {% for sample in samples %}
+                <tr>
+                    <td>{{sample.hinban}}</td>
+                    <td>{{sample.hinmei}}</td>
+                    <td>{{sample.color}}</td>
+                    <td>{{sample.size}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </tr>
+    </table>
+    {% endfor %}
+
+</div>
+{% endblock %}

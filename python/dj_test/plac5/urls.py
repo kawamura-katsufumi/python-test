@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index,add,delete,send,send_delete,kakutei
+from .views import index,add,delete,send,send_delete,kakutei,rireki
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('login/',auth_views.LoginView.as_view(template_name="plac5/login.html"),name="login"),
     path('logout/',auth_views.LogoutView.as_view(),name="logout"),
     path('kakutei/', kakutei, name="kakutei"),
+    path('rireki/', rireki, name="rireki"),
 ]

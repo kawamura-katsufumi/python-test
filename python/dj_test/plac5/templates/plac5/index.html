@@ -5,7 +5,8 @@
     <div><a href="{% url 'login' %}">ログイン</a>
     <a href="{% url 'logout' %}">ログアウト</a>
     </div>
-    <br><br>
+    <div style="text-align: right;"><a href="{% url 'rireki' %}">履歴確認</a></div>
+    <br>
     <p>@{{request.user}}</p>
 
     {% for message in  messages %}

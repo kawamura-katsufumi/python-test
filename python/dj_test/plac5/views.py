@@ -90,3 +90,11 @@ def kakutei(request):
         )
     del request.session["sample"]
     return redirect("index")
+
+
+def rireki(request):
+    if request.user.is_superuser:
+        items=Send.objects.all()
+        for sam in items:
+            samples=Sample.objects.filter(sample_number=sam.sample_number)
+        return render(request,"plac5/rireki.html",{"items":items,"samples":samples})
