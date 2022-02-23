@@ -81,8 +81,9 @@ def kakutei(request):
     all_id=request.session.get("sample",{})
     for key,value in all_id.items():
         data=Session.objects.get(id=key)
+        samnum=Send.objects.get(sample_number=x+1).id
         Sample.objects.create(
-            sample_number=x+1,
+            sample_number=Send(id=samnum),
             hinban=data.hinban,
             hinmei=data.hinmei,
             color=data.color,

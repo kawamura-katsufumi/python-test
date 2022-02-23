@@ -6,10 +6,10 @@ class All(ModelAdmin):
     list_display = ["hinban","hinmei","color","size"]
 
 class All2(ModelAdmin):
-    list_display = ["sample_number","busho","name","send_name","send_tel"]
+    list_display = ["id","sample_number","busho","name","send_name","send_tel"]
 
 class All3(ModelAdmin):
-    list_display = ["sample_number","hinban","hinmei","color","size"]
+    list_display = ["id","sample_number","hinban","hinmei","color","size"]
 
 class All4(ModelAdmin):
     list_display = ["name","busho"]
