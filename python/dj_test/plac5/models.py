@@ -14,18 +14,17 @@ class Session(models.Model):
 
 #送り先
 class Send(models.Model):
-    sample_number=models.IntegerField("認証番号")
     busho=models.CharField("部署",max_length=10)
     name=models.CharField("担当",max_length=10)
     send_name=models.CharField("送付先",max_length=10)
     send_tel=models.CharField("送付先電話",max_length=20)
 
     def __str__(self):
-        return str(self.sample_number)
+        return str(self.name)
 
 #送付サンプル内容
 class Sample(models.Model):
-    sample_number=models.ForeignKey(Send,on_delete=models.CASCADE,verbose_name="認証番号")
+    sample_number=models.ForeignKey(Send,on_delete=models.CASCADE)
     hinban=models.CharField("品番",max_length=10)
     hinmei=models.CharField("品名",max_length=55)
     color=models.CharField("カラー",max_length=10)

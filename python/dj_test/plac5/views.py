@@ -66,11 +66,10 @@ def send_delete(request,pk):
     return redirect("send")
 
 def kakutei(request):
-    num=Send.objects.all().aggregate(Max("sample_number"))
-    x=num["sample_number__max"]
+    # num=Send.objects.all().aggregate(Max("id"))
+    # x=num["id__max"]
     #届け先 
     Send.objects.create(
-        sample_number=x+1,
         busho=Shozoku.objects.get(name=request.user).busho,
         name=request.user,
         send_name=request.POST["send_name"],
@@ -81,9 +80,8 @@ def kakutei(request):
     all_id=request.session.get("sample",{})
     for key,value in all_id.items():
         data=Session.objects.get(id=key)
-        samnum=Send.objects.get(sample_number=x+1).id
         Sample.objects.create(
-            sample_number=Send(id=samnum),
+            sample_number=Send.objects.latest("id"),
             hinban=data.hinban,
             hinmei=data.hinmei,
             color=data.color,
@@ -96,6 +94,7 @@ def kakutei(request):
 def rireki(request):
     if request.user.is_superuser:
         items=Send.objects.all()
-        for sam in items:
-            samples=Sample.objects.filter(sample_number=sam.sample_number)
-        return render(request,"plac5/rireki.html",{"items":items,"samples":samples})
+        return render(request,"plac5/rireki.html",{"items":items})
+    else:
+        items=Send.objects.filter(name=request.user)
+        return render(request,"plac5/rireki.html",{"items":items})

@@ -2,20 +2,27 @@
 
 {% block main %}
 <div class="container mt-5" style="width: 70%">
+    <p><a href="{% url 'index' %}">HOME</a></p>
     <p>@{{request.user}}</p>
     {% for item in items %}
     <table>
         <tr>
-            <td>■部署：{{item.busho}}　担当者：{{item.name}}　送付先：{{item.send_name}}　連絡先：{{item.send_tel}}</td>
+            <td>
+                {% if request.user.is_superuser %}
+                    ■部署：{{item.busho}}　担当者：{{item.name}}　送付先：{{item.send_name}}　連絡先：{{item.send_tel}}
+                {% else %}
+                    ■送付先：{{item.send_name}}　連絡先：{{item.send_tel}}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <table class="table table-bordered">
-                {% for sample in samples %}
+                {% for sample in item.sample_set.all %}
                 <tr>
-                    <td>{{sample.hinban}}</td>
-                    <td>{{sample.hinmei}}</td>
-                    <td>{{sample.color}}</td>
-                    <td>{{sample.size}}</td>
+                    <td style="width: 10%;">{{sample.hinban}}</td>
+                    <td style="width: 65%;">{{sample.hinmei}}</td>
+                    <td style="width: 15%;">{{sample.color}}</td>
+                    <td style="width: 10%;">{{sample.size}}</td>
                 </tr>
                 {% endfor %}
             </table>

@@ -6,10 +6,14 @@ class All(ModelAdmin):
     list_display = ["hinban","hinmei","color","size"]
 
 class All2(ModelAdmin):
-    list_display = ["id","sample_number","busho","name","send_name","send_tel"]
+    list_display = ["id","busho","name","send_name","send_tel"]
 
 class All3(ModelAdmin):
-    list_display = ["id","sample_number","hinban","hinmei","color","size"]
+    list_display = ["id","hinban","hinmei","color","size","f_id"]
+
+    def f_id(self,obj):
+        return obj.sample_number_id
+    f_id.short_description="f_id"
 
 class All4(ModelAdmin):
     list_display = ["name","busho"]
