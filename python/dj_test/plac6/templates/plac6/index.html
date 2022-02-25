@@ -12,6 +12,10 @@
 <body>
     <div class="container mt-5" style="width: 70%">
         <h3>■ CSV取り込みと出力</h3>
+        <form action="{% url 'master' %}" method="post">
+            {% csrf_token %}
+            
+        </form>
     </div>
     
 </body>
