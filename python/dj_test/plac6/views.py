@@ -35,27 +35,27 @@ def master(request):
 
 
 def csv_import(request):
-    if 'csv' in request.FILES:
-        data = io.TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
-        print(data)
+    if 'csv2' in request.FILES:
+        data = io.TextIOWrapper(request.FILES['csv2'].file)
         csv_content = csv.reader(data)
-        print(csv_content)
-        # for i in csv_content:
-        #     hiragana, created = Hiragana.objects.get_or_create(moji = i[1])
-        #     hiragana.pk = i[0]
-        #     hiragana.moji = i[1]
-        #     hiragana.save()
-        return redirect('index')
+        header=next(csv_content)
+
+        dict={}
+        i=0
+        for line in csv_content:
+            dict[i]={
+                "hinmei":line[1],
+                "num":line[6],
+                "sku":line[8],
+            }
+            i+=1
+            mitsumori=line[7]
+            file=request.FILES['csv2']
+
+            if "キャブ" in str(file):
+                file="CAB"
+
+        return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"file":file})
     else:
         return redirect('index')
 
-
-# xxx.objects.update_or_create(
-#  # ユニークな値
-#   name=name,
-
-#  # 更新もしくは新規で追加したい値
-#   defalults={
-#   "name": name, "age": age  
-#  }
-# )

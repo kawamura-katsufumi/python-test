@@ -13,11 +13,47 @@
     <div class="container mt-5" style="width: 70%">
         <p><a href="/">HOME</a></p>
         <h3>■ CSV取り込みと出力</h3>
+        <!-- マスター -->
+        <!-- <p>マスターCSV</p>
         <form action="{% url 'master' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="file" name="csv">
             <button type="submit">送信</button>
         </form>
+        <hr> -->
+        <!-- インポート -->
+        <p>インポートCSV</p>
+        <form action="{% url 'csv_import' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="formFile" class="form-label">変換するCSVを選択してください。</label>
+                <input class="form-control" type="file" id="formFile" name="csv2">
+              </div>
+            <!-- <p><input type="file" name="csv2"></p> -->
+            <p><button class="btn btn-primary" type="submit">取込</button></p>
+        </form>
+
+        <hr>
+        <p>変換形式：{{file}}</p>
+        <p>見積番号：{{mitsumori}}</p>
+        <table class="table table-bordered">
+            <tr>
+                <th>商品詳細</th>
+                <th>数量</th>
+                <th>登録SKU</th>
+            </tr>
+            {% for key,value in dict.items %}            
+            <tr>
+                <td>{{value.hinmei}}</td>
+                <td>{{value.num}}</td>
+                <td>{{value.sku}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <hr>
+        ※変換後
+
     </div>
     
 </body>
