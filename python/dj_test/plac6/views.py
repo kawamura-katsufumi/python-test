@@ -10,13 +10,15 @@ def index(request):
 
 def master(request):
     if 'csv' in request.FILES:
-        data = io.TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
+        data = io.TextIOWrapper(request.FILES['csv'].file)
         csv_content = csv.reader(data)
+
+        header =next(csv_content) #タイトルを読み飛ばす
 
         for i in csv_content:
             Master.objects.update_or_create(
                 jan = i[7],
-                defalults={
+                defaults={
                     "brand": i[0],
                     "hinban": i[1],
                     "hinmei": i[2],
