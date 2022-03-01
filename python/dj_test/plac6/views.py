@@ -36,10 +36,13 @@ def master(request):
 
 def csv_import(request):
     if 'csv2' in request.FILES:
+
+        #------読込-------
         data = io.TextIOWrapper(request.FILES['csv2'].file)
         csv_content = csv.reader(data)
         header=next(csv_content)
 
+        #------HTMLへ------
         dict={}
         i=0
         for line in csv_content:
@@ -50,14 +53,33 @@ def csv_import(request):
             }
             i+=1
             mitsumori=line[7]
-            file=request.FILES['csv2']
+        
+        #------出力------
+        file=request.FILES['csv2']
+        if "キャブ" in str(file):
+            maker="CAB"
 
-            if "キャブ" in str(file):
-                file="CAB"
-            elif "トムス" in str(file):
-                file="TOMS"
 
-        return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"file":file})
+
+
+        elif "トムス" in str(file):
+            maker="TOMS"
+
+
+
+
+
+        return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"maker":maker})
+    
     else:
         return redirect('index')
 
+
+def csvexport(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment;  filename="somefilename.csv"'
+
+    writer = csv.writer(response)
+    for moji in Hiragana.objects.all():
+        writer.writerow([moji.pk, moji.moji])
+    return response
