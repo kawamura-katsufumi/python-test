@@ -22,7 +22,7 @@
         </form>
         <hr> -->
         <!-- インポート -->
-        <p>インポートCSV</p>
+        <br><br>
         <form action="{% url 'csv_import' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">

@@ -54,6 +54,8 @@ def csv_import(request):
 
             if "キャブ" in str(file):
                 file="CAB"
+            elif "トムス" in str(file):
+                file="TOMS"
 
         return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"file":file})
     else:
