@@ -3,9 +3,12 @@ import io
 import csv
 from django.http import HttpResponse
 from .models import Master
+import urllib.parse
+from django.contrib import messages
 
 
 def index(request):
+    messages.warning(request,"変換するCSVを選択してください。")
     return render(request,"plac6/index.html")
 
 def master(request):
@@ -42,44 +45,73 @@ def csv_import(request):
         csv_content = csv.reader(data)
         header=next(csv_content)
 
+        csv_list=list(csv_content)
+
+
         #------HTMLへ------
         dict={}
         i=0
-        for line in csv_content:
+
+        for line in csv_list:
             dict[i]={
                 "hinmei":line[1],
                 "num":line[6],
                 "sku":line[8],
             }
             i+=1
-            mitsumori=line[7]
         
-        #------出力------
+        mitsumori=csv_list[0][7]
+
+
+        #------出力項目準備(リストの中身)------
         file=request.FILES['csv2']
+
         if "キャブ" in str(file):
             maker="CAB"
+            ex_csv=[]
 
+            for line in csv_list:
+                a=[]
+                item=Master.objects.get(jan=line[8]+" ")
 
+                a.append(item.hinban)
+                a.append(item.color_no)
+                a.append(item.size_no)
+                a.append(line[6])
+                ex_csv.append(a)
+
+            reset="OK"
+            messages.success(request,"変換後のCSVをダウンロードしました！")
 
 
         elif "トムス" in str(file):
             maker="TOMS"
 
 
+        #------セッション-----
+        request.session["csv_list"]={"file":str(file),"csv":ex_csv}
 
+        return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"maker":maker,"reset":reset})
 
-
-        return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"maker":maker})
     
     else:
         return redirect('index')
 
 
-def csvexport(request):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment;  filename="somefilename.csv"'
 
+def csv_export(request):
+    csv_list=request.session.get("csv_list")
+    file_name=csv_list["file"]
+    ex_csv=csv_list["csv"]
+
+    quoted_filename = urllib.parse.quote("変換_" + file_name)
+
+    del request.session["csv_list"]
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] =  "attachment;  filename='{}'; filename*=UTF-8''{}".format(quoted_filename, quoted_filename)
+    
     writer = csv.writer(response)
-    for moji in Hiragana.objects.all():
-        writer.writerow([moji.pk, moji.moji])
+    for line in ex_csv:
+        writer.writerow(line)
     return response

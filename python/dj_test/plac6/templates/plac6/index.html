@@ -12,7 +12,16 @@
 <body>
     <div class="container mt-5" style="width: 70%">
         <p><a href="/">HOME</a></p>
-        <h3>■ CSV取り込みと出力</h3>
+        <h3>■ 発注用CSV変換</h3>
+
+        {% for message in  messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p><div class="alert alert-success" role="alert">{{message}}</div></p>
+            {% else %}
+                <p><div class="alert alert-warning" role="alert">{{message}}</div></p>
+            {% endif %}
+        {% endfor %}
+
         <!-- マスター -->
         <!-- <p>マスターCSV</p>
         <form action="{% url 'master' %}" method="post" enctype="multipart/form-data">
@@ -22,15 +31,12 @@
         </form>
         <hr> -->
         <!-- インポート -->
-        <br><br>
         <form action="{% url 'csv_import' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="formFile" class="form-label">変換するCSVを選択してください。</label>
                 <input class="form-control" type="file" id="formFile" name="csv2">
-              </div>
-            <!-- <p><input type="file" name="csv2"></p> -->
-            <p><button class="btn btn-primary" type="submit">取込</button></p>
+            </div>
+            <p><button class="btn btn-primary" type="submit">変換</button></p>
         </form>
 
         <hr>
@@ -38,21 +44,24 @@
         <p>見積番号：{{mitsumori}}</p>
         <table class="table table-bordered">
             <tr>
-                <th>商品詳細</th>
-                <th>数量</th>
-                <th>登録SKU</th>
+                <th style="text-align: center;">商品詳細</th>
+                <th style="text-align: center;">数量</th>
+                <th style="text-align: center;">登録SKU</th>
             </tr>
             {% for key,value in dict.items %}            
             <tr>
                 <td>{{value.hinmei}}</td>
-                <td>{{value.num}}</td>
-                <td>{{value.sku}}</td>
+                <td style="text-align: center;">{{value.num}}</td>
+                <td style="text-align: center;">{{value.sku}}</td>
             </tr>
             {% endfor %}
         </table>
 
         <hr>
-        ※変換後
+        <!-- CSVダウンロード -->
+        {% if reset %}
+        <script>location.href="{% url 'csv_export' %}";</script>
+        {% endif %}
 
     </div>
     
