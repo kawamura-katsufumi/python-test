@@ -36,7 +36,13 @@
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile" name="csv2">
             </div>
-            <p><button class="btn btn-primary" type="submit">変換</button></p>
+            <p><button class="btn btn-primary" type="submit">
+                {% if reset %}
+                リセット
+                {% else %}
+                変換
+                {% endif %}
+            </button></p>
         </form>
 
         <hr>
