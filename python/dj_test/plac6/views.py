@@ -130,10 +130,12 @@ def csv_export(request):
 
     del request.session["csv_list"]
 
-    response = HttpResponse(content_type='text/csv')
+    response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] =  "attachment;  filename='{}'; filename*=UTF-8''{}".format(quoted_filename, quoted_filename)
     
+    sio = io.StringIO()
     writer = csv.writer(response)
     for line in ex_csv:
         writer.writerow(line)
+        response.write(sio.getvalue().encode('cp932'))
     return response
