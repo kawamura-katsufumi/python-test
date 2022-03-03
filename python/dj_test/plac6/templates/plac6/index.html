@@ -15,10 +15,14 @@
         <h3>■ 発注用CSV変換</h3>
 
         {% for message in  messages %}
-            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                <p><div class="alert alert-success" role="alert">{{message}}</div></p>
-            {% else %}
-                <p><div class="alert alert-warning" role="alert">{{message}}</div></p>
+            {% if forloop.first %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <p><div class="alert alert-success" role="alert">{{message}}</div></p>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                    <p><div class="alert alert-warning" role="alert">{{message}}</div></p>
+                {% else %}
+                    <p><div class="alert alert-danger" role="alert">{{message}}</div></p>
+                {% endif %}
             {% endif %}
         {% endfor %}
 
@@ -31,10 +35,12 @@
         </form>
         <hr> -->
         <!-- インポート -->
+        <br>
         <form action="{% url 'csv_import' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
-                <input class="form-control" type="file" id="formFile" name="csv2">
+                <label for="formFile" class="form-label">※対応メーカー：トムス㈱、キャブ㈱</label>
+                <input class="form-control form-control-lg" type="file" id="formFile" name="csv2">
             </div>
             <p><button class="btn btn-primary" type="submit">
                 {% if reset %}
@@ -44,8 +50,8 @@
                 {% endif %}
             </button></p>
         </form>
-
         <hr>
+        <p>対象ファイル：{{filename}}</p>
         <p>変換形式：{{maker}}</p>
         <p>見積番号：{{mitsumori}}</p>
         <table class="table table-bordered">
@@ -63,7 +69,7 @@
             {% endfor %}
         </table>
 
-        <hr>
+
         <!-- CSVダウンロード -->
         {% if reset %}
         <script>location.href="{% url 'csv_export' %}";</script>

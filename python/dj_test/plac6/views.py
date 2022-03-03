@@ -65,8 +65,9 @@ def csv_import(request):
 
         #------出力項目準備(リストの中身)------
         file=request.FILES['csv2']
+        filename=str(file)
 
-        if "キャブ" in str(file):
+        if "キャブ" in filename:
             maker="CAB"
             ex_csv=[]
 
@@ -80,18 +81,39 @@ def csv_import(request):
                 a.append(line[6])
                 ex_csv.append(a)
 
-            reset="OK"
-            messages.success(request,"変換後のCSVをダウンロードしました！")
 
-
-        elif "トムス" in str(file):
+        elif "トムス" in filename:
             maker="TOMS"
+            ex_csv=[["品番","カラーコード","サイズコード","数量","OPP袋同送数","備考","お客様注文Ｎｏ"]]
 
+            for line in csv_list:
+                a=[]
+                item=Master.objects.get(jan=line[8]+" ")
+
+                a.append(item.hinban)
+                a.append(item.color_no)
+                a.append(item.size_no)
+                a.append(line[6])
+                a.append("")
+                a.append(line[9])
+                a.append(line[7])
+                ex_csv.append(a)
+
+        else:
+            messages.error(request,"対応していないメーカーのCSVが選択されています！")
+            return render(request,"plac6/index.html",{"filename":filename})
+
+
+
+
+        reset="OK"
+        messages.success(request,"変換後のCSVをダウンロードしました！")
 
         #------セッション-----
         request.session["csv_list"]={"file":str(file),"csv":ex_csv}
 
-        return render(request,"plac6/index.html",{"dict":dict,"mitsumori":mitsumori,"maker":maker,"reset":reset})
+        return render(request,"plac6/index.html",
+            {"dict":dict,"mitsumori":mitsumori,"maker":maker,"reset":reset,"filename":filename})
 
     
     else:
