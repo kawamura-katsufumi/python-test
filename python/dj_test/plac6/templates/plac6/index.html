@@ -39,7 +39,7 @@
         <form action="{% url 'csv_import' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="formFile" class="form-label">※対応メーカー：トムス㈱、キャブ㈱、フェリック㈱、㈱ボンマックス</label>
+                <label for="formFile" class="form-label">※対応メーカー：TOMS / CAB / フェリック / ボンマックス</label>
                 <input class="form-control form-control-lg" type="file" id="formFile" name="csv2">
             </div>
             <p><button class="btn btn-primary" type="submit">
