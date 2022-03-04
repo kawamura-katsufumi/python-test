@@ -99,6 +99,24 @@ def csv_import(request):
                 a.append(line[7])
                 ex_csv.append(a)
 
+
+        elif "フェリック" in filename:
+            maker="フェリック"
+            ex_csv=[]
+
+            for line in csv_list:
+                a=[line[0],line[3],line[5],line[6]]
+                ex_csv.append(a)
+
+
+        elif "ボンマックス" in filename:
+            maker="ボンマックス"
+            ex_csv=[["品番","カラー","サイズ","個数","明細摘要"]]
+
+            for line in csv_list:
+                a=[line[0],line[3],line[5],line[6],""]
+                ex_csv.append(a)
+
         else:
             messages.error(request,"対応していないメーカーのCSVが選択されています！")
             return render(request,"plac6/index.html",{"filename":filename})
