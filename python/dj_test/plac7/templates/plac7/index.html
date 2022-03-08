@@ -13,6 +13,9 @@
             {% csrf_token %}
             <input type="number" id="number1" required>
             <input type="number" id="number2" required>
+            <br><br>
+            <label for="hinban">品番：</label>
+            <input type="hinban" id="hinban" required>
             <button type="submit" >計算</button>
         </form>
 
@@ -20,6 +23,7 @@
         <div class="result">
         </div>
     </div>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
@@ -54,6 +58,9 @@
           }
       });
 
+
+
+
       $('#ajax-number').on('submit', function(e) {
           e.preventDefault();
 
@@ -63,12 +70,18 @@
               'data': {
                   'number1': $('#number1').val(),
                   'number2': $('#number2').val(),
+                  'hinban': $('#hinban').val(),
               },
               'dataType': 'json'
           })
           .done(function(response){
               $('.result').prepend('<p>引き算結果：' + response.minus + '</p>');
               $('.result').prepend('<p>足し算結果：' + response.plus + '</p>');
+              $('.result').prepend('<p>品番：' + response.hinban + '</p>');
+              $.each(response.items, function() {
+                　//※文字列と結合し、String型と認識させる
+                console.log(value);
+                })
           });
       });
   </script>
