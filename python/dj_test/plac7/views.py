@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from plac6.models import Master
+from .forms import Plac7form
 
 def index(request):
-    return render(request,"plac7/index.html")
+    form=Plac7form()
+    return render(request,"plac7/index.html",{"form":form})
 
 
 def ajax_number(request):
