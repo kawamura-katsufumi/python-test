@@ -25,3 +25,6 @@ def ajax_number(request):
     }
     # print(d)
     return JsonResponse(d)
+
+def selenium_test(request):
+    pass
