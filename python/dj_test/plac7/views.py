@@ -2,6 +2,12 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from plac6.models import Master
 from .forms import Plac7form
+import urllib.request
+from selenium import webdriver
+import chromedriver_binary
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+import requests
 
 def index(request):
     form=Plac7form()
