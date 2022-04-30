@@ -17,7 +17,7 @@ def ajax_number(request):
     minus = number1 - number2
     items= Master.objects.filter(hinban__contains = hinban).distinct().values_list("color_name",flat=True)
     items=list(items)
-    # print(items)
+    print(items)
     d = {
         'plus': plus,
         'minus': minus,
