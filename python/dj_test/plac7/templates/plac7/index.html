@@ -24,21 +24,27 @@
 
 
     <p><hr></p>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
     <div class="container">
         <h2>数値の入力</h2>
         <form id="ajax-number" action="{% url 'plac7:ajax_number' %}" method="POST">
             {% csrf_token %}
-            <input type="number" id="number1" required>
+            <!-- <input type="number" id="number1" required>
             <input type="number" id="number2" required>
-            <br><br>
-            <label for="hinban">品番：</label>
-            <input type="hinban" id="hinban" required>
-            <button type="submit" >計算</button>
+            <br><br> -->
+            <p><label for="hinban">品番：</label>
+            <input type="hinban" id="hinban" style="width: 50px;" required>
+            <button type="submit" >表示</button><br>
+            </p>
+            <p>
+            <label for="test2">カラー：</label>
+            <select name="test2" id="test2" style="width: 150px;"></select>
+            </p>
         </form>
 
         <h2>数値の計算</h2>
-        <div class="result">
-        </div>
+        <div class="result"></div>
+        <div id="result2"></div>
     </div>
 
 
@@ -85,22 +91,57 @@
               'url': '{% url "plac7:ajax_number" %}',
               'type': 'POST',
               'data': {
-                  'number1': $('#number1').val(),
-                  'number2': $('#number2').val(),
+                //   'number1': $('#number1').val(),
+                //   'number2': $('#number2').val(),
                   'hinban': $('#hinban').val(),
               },
               'dataType': 'json'
           })
           .done(function(response){
-              $('.result').prepend('<p>引き算結果：' + response.minus + '</p>');
-              $('.result').prepend('<p>足し算結果：' + response.plus + '</p>');
-              $('.result').prepend('<p>品番：' + response.hinban + '</p>');
-              $.each(response.items, function() {
-                　//※文字列と結合し、String型と認識させる
-                console.log(value);
-                })
+            //   $('.result').prepend('<p>引き算結果：' + response.minus + '</p>');
+            //   $('.result').prepend('<p>足し算結果：' + response.plus + '</p>');
+            //   $('.result').prepend('<p>品番：' + response.hinban + '</p>');
+            var test2
+            for (var item of response.items){
+                test2 +="<option>" + item + "</option>"
+            }
+            //   for (var item of response.items){
+            //     $('.result').prepend('<p>カラー：' + item + '</p>');
+            //   }
+              document.getElementById("result2").innerText=response.items;
+              
+              document.getElementById("test2").innerHTML=test2;
+              
           });
       });
   </script>
+
+
+
+  <hr>
+  <form action="{% url 'plac7:ajax_test' %}" method="post">
+      {% csrf_token %}
+    <label for="test1">品番：</label>
+    <input type="text" id="test1" name="test1">
+    <button id="test2" type="submit">test</button>
+  </form>
+  <div id="answer"></div>
+
+  <script>
+      var ans=document.getElementById("answer");
+
+      document.getElementById("test2").addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        (async () => {
+            const response = await fetch("{% url 'plac7:ajax_test' %}");
+            
+            const data = await response.json();
+            ans.innerHTML=data;
+        })();
+});
+  </script>
+
+
 </body>
 </html>

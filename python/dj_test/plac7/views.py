@@ -10,19 +10,30 @@ def index(request):
 
 
 def ajax_number(request):
-    number1 = int(request.POST.get('number1'))
-    number2 = int(request.POST.get('number2'))
+    # number1 = int(request.POST.get('number1'))
+    # number2 = int(request.POST.get('number2'))
     hinban = request.POST.get('hinban')
-    plus = number1 + number2
-    minus = number1 - number2
+    # plus = number1 + number2
+    # minus = number1 - number2
     items= Master.objects.filter(hinban__contains = hinban).distinct().values_list("color_name",flat=True)
     items=list(items)
-    print(items)
+    # print(items)
     d = {
-        'plus': plus,
-        'minus': minus,
+        # 'plus': plus,
+        # 'minus': minus,
         'hinban':hinban,
         'items':items,
     }
+    # print(d)
+    return JsonResponse(d)
+
+
+def ajax_test(request):
+    hinban = request.POST["test1"]
+    print(hinban)
+    items= Master.objects.filter(hinban__contains = hinban).distinct().values_list("color_name",flat=True)
+    items=list(items)
+    print(items)
+    d = {'items':items}
     # print(d)
     return JsonResponse(d)
