@@ -116,32 +116,5 @@
       });
   </script>
 
-
-
-  <hr>
-  <form action="{% url 'plac7:ajax_test' %}" method="post">
-      {% csrf_token %}
-    <label for="test1">品番：</label>
-    <input type="text" id="test1" name="test1">
-    <button id="test2" type="submit">test</button>
-  </form>
-  <div id="answer"></div>
-
-  <script>
-      var ans=document.getElementById("answer");
-
-      document.getElementById("test2").addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        (async () => {
-            const response = await fetch("{% url 'plac7:ajax_test' %}");
-            
-            const data = await response.json();
-            ans.innerHTML=data;
-        })();
-});
-  </script>
-
-
 </body>
 </html>

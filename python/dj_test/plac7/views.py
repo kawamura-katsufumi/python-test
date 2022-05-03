@@ -27,13 +27,3 @@ def ajax_number(request):
     # print(d)
     return JsonResponse(d)
 
-
-def ajax_test(request):
-    hinban = request.POST["test1"]
-    print(hinban)
-    items= Master.objects.filter(hinban__contains = hinban).distinct().values_list("color_name",flat=True)
-    items=list(items)
-    print(items)
-    d = {'items':items}
-    # print(d)
-    return JsonResponse(d)
