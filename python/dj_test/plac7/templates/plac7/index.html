@@ -45,9 +45,47 @@
         <h2>数値の計算</h2>
         <div class="result"></div>
         <div id="result2"></div>
+    
+    <br><br><br><br><br>
+    
+    <br>
+    <form action="{% url 'csv_import' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="formFile" class="form-label">※対応メーカー：TOMS / CAB / フェリック / ボンマックス</label>
+            <input class="form-control form-control-lg" type="file" id="formFile" name="csv2" style="height: 100px;">
+            <br>
+
+            <div id="test111">
+            <input type="file" id="formFile2" name="csv2" style="height: 100px;">
+            </div>
+
+        </div>       
+    </form>
+
+    <script>
+        var file1=document.getElementById("formFile2");
+        var waku=document.getElementById("test111");
+        file1.addEventListener("mouseenter",function(){
+            waku.style.borderWidth=thic;
+            waku.style.borderColor="red";
+        })
+            
+        
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
-
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
       function getCookie(name) {
