@@ -7,6 +7,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <title>plac7</title>
+    <style>
+        .box{
+            border: solid 0px #f00;
+            }
+
+        .box:hover{
+            border: solid 2px #f00;
+            }
+    </style>
+ 
 </head>
 <body>
     <div class="container" style="width: 70%;">
@@ -53,12 +63,17 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="formFile" class="form-label">※対応メーカー：TOMS / CAB / フェリック / ボンマックス</label>
+            <div class="box">
             <input class="form-control form-control-lg" type="file" id="formFile" name="csv2" style="height: 100px;">
+            </div>
             <br>
 
-            <div id="test111">
-            <input type="file" id="formFile2" name="csv2" style="height: 100px;">
+            <div class="waku" id="test111">
+            <input type="file" id="formFile2" name="csv2" style="height: 100px ;outline: 3px;">
             </div>
+
+            <div class="box"><input type="file" id="formFile2" name="csv2" style="height: 100px ;outline: 3px;"></div>
+                
 
         </div>       
     </form>
@@ -66,10 +81,10 @@
     <script>
         var file1=document.getElementById("formFile2");
         var waku=document.getElementById("test111");
-        file1.addEventListener("mouseover",function(){
-            window.alert("aaa");
-            waku.style.borderWidth=thic;
-            waku.style.borderColor="red";
+        waku.addEventListener("mouseover",function(){
+            waku.style.outlineColor="red";
+            waku.style.outlineWidth="medium";
+            
         })
             
         
