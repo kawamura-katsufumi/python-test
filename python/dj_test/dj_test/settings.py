@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'plac5',
     'plac6',
     'plac7',
+    'plac8',
     'django_cleanup',
 ]
 
@@ -138,3 +139,5 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
 
 SESSION_SAVE_EVERY_REQUEST = True
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
