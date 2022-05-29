@@ -12,27 +12,26 @@
         flex-direction: row;
     }
     .class1 {
-        height: 30%;
-        border-bottom: solid;
+        height: 150px;
     }
     .class2 {
         display: flex;
         flex-direction: row;
-        /* height: 70%; */
+        height: 300px;
+    }
+    .if_top{
+        border: solid;
     }
     </style>
 </head>
 <body>
     <div class="base">
         <div class="class1">
-            <iframe src="{% url 'plac8:top' %}"></iframe>
+            <iframe src="{% url 'plac8:top' %}" width="100%" class="if_top"></iframe>
         </div>
         <div class="class2">
-            <div style="width:70%">
-                <iframe src="{% url 'plac8:left' %}" ></iframe>
-            </div>
-            <div style="width:30%">
-                <iframe src="{% url 'plac8:right' %}"></iframe>
+            <iframe src="{% url 'plac8:left' %}" width="70%" class="if_top"></iframe>
+            <iframe src="{% url 'plac8:right' %}" width="30%" class="if_top"></iframe>
             </div>           
         </div>       
     </div>
