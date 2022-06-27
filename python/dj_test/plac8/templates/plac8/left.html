@@ -14,11 +14,11 @@
     }
     .main{
         padding: 0.5em 1em;
-        margin: 2em 0;
+        margin: 0.5em 0;
         background: #FFF;
         border: solid 0.5px lightslategray;
-        border-bottom: solid 6px lightslategray;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+        border-bottom: solid 4px lightslategray;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
         border-radius: 9px;
         text-align: left;
     }
@@ -32,12 +32,18 @@
         border-radius: 9px;
         text-align: left;
     }
+    /* .detail2{
+        display: none;
+    } */
+    .test2{
+        display: none;
+    }
 </style>
 </head>
 <body>
     <div align="center">
         <div style="width: 80%;">
-            <!-- <div class="main">
+            <div class="main">
                 <div class="class1">
                     <div style="width: 300px;">
                         川村
@@ -45,7 +51,7 @@
                     <div style="width: 500px;">
                         株式会社プラスワンインターナショナル
                     </div>
-                    <div style="width: 300px;">
+                    <div style="width: 400px;">
                         レDM　レメール　レTEL
                     </div>
                 </div>
@@ -59,79 +65,125 @@
                     <div style="width: 300px;">
                         受注：1回　￥20,000
                     </div>
+                    <div style="width: 100px;text-align: right;">
+                        <button class="detail">詳細</button>
+                    </div>
                 </div>
-            </div> -->
-
-            
-
-            <!-- jsテスト -->
-            <div>
-                <div>
-                    <button class="icon-btn">三橋</button>
-                    <div class="test">aaa</div>
-                </div>
-                <div class="box">
-                    <button class="icon-btn">阿部</button>
-                    <div class="test">bbb</div>
-                </div>
-                <div class="box">
-                    <button class="icon-btn">田島</button>
-                    <div class="test">ccc</div>
-                </div>
-                <div class="box">
-                    <button class="icon-btn">花井</button>
-                    <div class="test">ddd</div>
+                <div style="display: none;">
+                    <hr>
+                    見積送信　0028073-1　\77,000　見：2022/5/10　受：　 Tel　カスタマー事業部　田中<br>
+                    5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)
                 </div>
             </div>
 
-            <hr>
-            <div id="aaa" class="apple">あああ</div>
-            <div id="bbb" class="apple">いいい</div>
+            <div class="main">
+                <div class="class1">
+                    <div style="width: 300px;">
+                        川村
+                    </div>
+                    <div style="width: 500px;">
+                        株式会社プラスワンインターナショナル
+                    </div>
+                    <div style="width: 400px;">
+                        レDM　レメール　レTEL
+                    </div>
+                </div>
+                <div class="class1">
+                    <div style="width: 300px;">
+                        登録日：2022/10/5
+                    </div>
+                    <div style="width: 500px;">
+                        事業推進部　河野正臣
+                    </div>
+                    <div style="width: 300px;">
+                        受注：1回　￥20,000
+                    </div>
+                    <div style="width: 100px;text-align: right;">
+                        <button class="detail">詳細</button>
+                    </div>
+                </div>
+                <div style="display: none;">
+                    <hr>
+                    見積送信　0028073-1　\77,000　見：2022/5/10　受：　 Tel　カスタマー事業部　田中<br>
+                    5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)
+                </div>
+            </div>
 
-            <button onclick="shoukyo()">消す</button>
-            <hr>
-            <button>ボタン</button>↓↓
-            <div id="none">消えます</div>
-            <button>ボタン</button>↓↓
-            <div id="none">消えます</div>
+            
+
+            <!-- jsテスト
+            <div>
+                <div>
+                    <button class="icon-btn">三橋</button>
+                    <div id="test">aaa</div>
+                </div>
+                <div class="box">
+                    <button class="icon-btn">阿部</button>
+                    <div id="test">bbb</div>
+                </div>
+                <div class="box">
+                    <button class="icon-btn">田島</button>
+                    <div id="test">ccc</div>
+                </div>
+                <div class="box">
+                    <button class="icon-btn">花井</button>
+                    <div id="test">ddd</div>
+                </div>
+            </div>
+            <div class="test2">これが対象</div> -->
+
 
         </div>
     </div>
     <script>
 
-        const divHide = document.getElementById('none');
-        const Btn = document.querySelector('button');
-
-        divHide.style.display = 'block'; //最初は表示をブロックに
-        Btn.addEventListener('click', function (event) {
-        none.style.display = 'none'; //要素を消す処理
-        });
-
-
-        function shoukyo(){
-        var kesu = document.getElementsByClassName('apple');
-        for(var i = 0; i < kesu.length; i++) {
-            kesu[i].style.display = "none";
-        }
-        }
-
-        document.addEventListener('DOMContentLoaded',function(){
-            var btns = document.querySelectorAll('.icon-btn');
+        var det = document.querySelectorAll(".detail");
             
-            for(var i = 0; i < btns.length; i++){
-                btns[i].addEventListener('click',function(){
+        for(var i = 0; i < det.length; i++){
+            det[i].addEventListener('click',function(){
+                oya=this.parentNode.parentNode;
+                yatsu=oya.nextElementSibling;
+
+                if (yatsu.style.display == "none"){
+                    yatsu.style.display="block";
+                    this.innerText="戻す";
+                } else {
+                    yatsu.style.display="none";
+                    this.innerText="詳細";
+                };
+            },false);
+        }
+
+            // var btns = document.querySelectorAll('.icon-btn');
+            
+            // for(var i = 0; i < btns.length; i++){
+            //     btns[i].addEventListener('click',function(){
+            //         this.style.color = 'blue';
+            //         console.log(this.nextElementSibling);
+            //         oya=this.parentNode;
+            //         oya2=oya.parentNode;
+            //         yatsu2=oya2.nextElementSibling;
+            //         console.log(yatsu2);
+
+            //         if (yatsu2.style.display=="none"){
+            //             yatsu2.style.display="block";
+            //             this.innerText="戻す";
+            //         } else {
+            //             yatsu2.style.display="none";
+            //             this.innerText="詳細";
+            //         };
                     
-                    var tests = document.querySelectorAll('.test');
-                    for(var h=0;h<tests.length;h++){
-                        if (i==h){
-                            tests[h].style.display="none";
-                        }
-                    }
-                    
-                    
-                },false);
-            }
-        },false);
+
+
+            //         // console.log(oya);
+            //         // yatsu=this.nextElementSibling
+            //         // console.log(yatsu);
+            //         // yatsu.style.display="none";
+            //         // yatsu=oya.getElementsByID("test");
+            //         // oya.style.display="none";
+            //     },false);
+            // }
+
 
     </script>
 </body>
