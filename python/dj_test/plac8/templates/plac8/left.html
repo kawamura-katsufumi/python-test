@@ -37,7 +37,7 @@
 <body>
     <div align="center">
         <div style="width: 80%;">
-            <div class="main">
+            <!-- <div class="main">
                 <div class="class1">
                     <div style="width: 300px;">
                         川村
@@ -59,35 +59,79 @@
                     <div style="width: 300px;">
                         受注：1回　￥20,000
                     </div>
+                </div>
+            </div> -->
+
+            
+
+            <!-- jsテスト -->
+            <div>
+                <div>
+                    <button class="icon-btn">三橋</button>
+                    <div class="test">aaa</div>
+                </div>
+                <div class="box">
+                    <button class="icon-btn">阿部</button>
+                    <div class="test">bbb</div>
+                </div>
+                <div class="box">
+                    <button class="icon-btn">田島</button>
+                    <div class="test">ccc</div>
+                </div>
+                <div class="box">
+                    <button class="icon-btn">花井</button>
+                    <div class="test">ddd</div>
                 </div>
             </div>
 
-            <div class="main2">
-                <div class="class1">
-                    <div style="width: 300px;">
-                        川村
-                    </div>
-                    <div style="width: 500px;">
-                        株式会社プラスワンインターナショナル
-                    </div>
-                    <div style="width: 300px;">
-                        レDM　レメール　レTEL
-                    </div>
-                </div>
-                <div class="class1">
-                    <div style="width: 300px;">
-                        登録日：2022/10/5
-                    </div>
-                    <div style="width: 500px;">
-                        事業推進部　河野正臣
-                    </div>
-                    <div style="width: 300px;">
-                        受注：1回　￥20,000
-                    </div>
-                </div>
-            </div>
+            <hr>
+            <div id="aaa" class="apple">あああ</div>
+            <div id="bbb" class="apple">いいい</div>
+
+            <button onclick="shoukyo()">消す</button>
+            <hr>
+            <button>ボタン</button>↓↓
+            <div id="none">消えます</div>
+            <button>ボタン</button>↓↓
+            <div id="none">消えます</div>
 
         </div>
     </div>
+    <script>
+
+        const divHide = document.getElementById('none');
+        const Btn = document.querySelector('button');
+
+        divHide.style.display = 'block'; //最初は表示をブロックに
+        Btn.addEventListener('click', function (event) {
+        none.style.display = 'none'; //要素を消す処理
+        });
+
+
+        function shoukyo(){
+        var kesu = document.getElementsByClassName('apple');
+        for(var i = 0; i < kesu.length; i++) {
+            kesu[i].style.display = "none";
+        }
+        }
+
+        document.addEventListener('DOMContentLoaded',function(){
+            var btns = document.querySelectorAll('.icon-btn');
+            
+            for(var i = 0; i < btns.length; i++){
+                btns[i].addEventListener('click',function(){
+                    var tests = document.querySelectorAll('.test');
+                    for(var h=0;h<tests.length;h++){
+                        if (i==h){
+                            tests[h].style.display="none";
+                        }
+                    }
+                    
+                    
+                },false);
+            }
+        },false);
+
+    </script>
 </body>
 </html>
