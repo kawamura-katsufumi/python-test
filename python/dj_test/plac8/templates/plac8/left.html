@@ -40,6 +40,12 @@
     }
     .detail3{
         font-size: 0.9em;
+        background-color: rgb(243, 200, 220);
+        border-top:  dotted 2px #f30e80;
+        border-bottom: dotted 2px #f30e80;
+    }
+    .detail4{
+        font-size: 0.9em;
         padding-top: 5px;
     }
     .btn-sticky {
@@ -55,6 +61,22 @@
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.29);
     }
     .btn-sticky:active {
+        box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+        transform: translateY(2px);
+    }
+    .btn-sticky2 {
+        font-size: 0.9em;
+        display: inline-block;
+        /* padding: 0.5em 1em; */
+        text-decoration: none;
+        background: #f7f7f7;
+        border: solid 1px #4dabf8;
+        border-left: solid 6px #4dabf8;/*左線*/
+        color: #4dabf8;/*文字色*/
+        font-weight: bold;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.29);
+    }
+    .btn-sticky2:active {
         box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
         transform: translateY(2px);
     }
@@ -96,34 +118,75 @@
                         <div class="class1">
                             <div style="width: 300px;">見積金額：\77,000</div>
                             <div style="width: 350px;">見積番号：0028073-1</div>
-                            <div style="width: 300px;">経路：TEL</div>
+                            <div style="width: 300px;">流入経路：TEL</div>
                             <div style="width: 250px;">カスタマー事業部</div>
                         </div>
                         <div class="class1">
                             <div style="width: 300px;">ステータス：見積送信</div>
                             <div style="width: 350px;">見積日：2020/05/01</div>
-                            <div style="width: 300px;">受注日：2020/05/03</div>
+                            <div style="width: 300px;"></div>
                             <div style="width: 250px;">田中レオト</div>
                         </div>
                     </div>
-                    <div class="detail3">
+                    <div class="detail4">
                         <div>5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)</div>
                         <div>351-AIP　3.5オンス　インターロックドライポロシャツ
                         </div>
+                    </div>
+
+                    <hr>
+                    <div class="detail3">
+                        <div class="class1">
+                            <div style="width: 300px;">見積金額：\20,000</div>
+                            <div style="width: 350px;">見積番号：0028073-2</div>
+                            <div style="width: 300px;">流入経路：TEL</div>
+                            <div style="width: 250px;">カスタマー事業部</div>
+                        </div>
+                        <div class="class1">
+                            <div style="width: 300px;">ステータス：発送完了</div>
+                            <div style="width: 350px;">見積日：2020/05/11</div>
+                            <div style="width: 300px;">受注日：2020/05/12</div>
+                            <div style="width: 250px;">田中レオト</div>
+                        </div>
+                    </div>
+                    <div class="detail4">
+                        <div>302-ADP　4.4オンス　ドライポロシャツ</div>
                     </div> 
+
+                    <hr>
+                    <div class="detail2">
+                        <div class="class1">
+                            <div style="width: 300px;">見積金額：\65,000</div>
+                            <div style="width: 350px;">見積番号：0028073-3</div>
+                            <div style="width: 300px;">流入経路：TEL</div>
+                            <div style="width: 250px;">カスタマー事業部</div>
+                        </div>
+                        <div class="class1">
+                            <div style="width: 300px;">ステータス：見積送信</div>
+                            <div style="width: 350px;">見積日：2020/06/01</div>
+                            <div style="width: 300px;"></div>
+                            <div style="width: 250px;">田中レオト</div>
+                        </div>
+                    </div>
+                    <div class="detail4">
+                        <div>5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)</div>
+                        <div>351-AIP　3.5オンス　インターロックドライポロシャツ</div>
+                        <div>5900　4.1oz　ドライアスレチックTシャツ</div>
+                    </div> 
+
                 </div>
             </div>
 
             <div class="main">
                 <div class="class1">
                     <div style="width: 300px;">
-                        川村
+                        大西
                     </div>
                     <div style="width: 500px;">
-                        株式会社プラスワンインターナショナル
+                        穂岐山刃物株式会社
                     </div>
                     <div style="width: 400px;">
-                        レDM　レTEL　レ外商
+                        レDM　レメール　レTEL
                     </div>
                 </div>
                 <div class="class1">
@@ -131,19 +194,56 @@
                         登録日：2022/10/5
                     </div>
                     <div style="width: 500px;">
-                        事業推進部　河野正臣
+                        開発部　望田浩三
                     </div>
                     <div style="width: 300px;">
-                        受注：1回　￥20,000
+                        
                     </div>
                     <div style="width: 100px;text-align: right;">
-                        <span class="detail">詳細</span>
+                        <button class="detail btn-sticky2">詳細</button>
                     </div>
                 </div>
                 <div style="display: none;">
                     <hr>
-                    見積送信　0028073-1　\77,000　見：2022/5/10　受：　 Tel　カスタマー事業部　田中<br>
-                    5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)
+                    <div class="detail2">
+                        <div class="class1">
+                            <div style="width: 300px;">見積金額：\77,000</div>
+                            <div style="width: 350px;">見積番号：0028073-1</div>
+                            <div style="width: 300px;">流入経路：TEL</div>
+                            <div style="width: 250px;">DX/IT推進</div>
+                        </div>
+                        <div class="class1">
+                            <div style="width: 300px;">ステータス：見積送信</div>
+                            <div style="width: 350px;">見積日：2020/05/01</div>
+                            <div style="width: 300px;"></div>
+                            <div style="width: 250px;">八木保光</div>
+                        </div>
+                    </div>
+                    <div class="detail4">
+                        <div>5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)</div>
+                        <div>351-AIP　3.5オンス　インターロックドライポロシャツ
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="detail2">
+                        <div class="class1">
+                            <div style="width: 300px;">見積金額：\20,000</div>
+                            <div style="width: 350px;">見積番号：0028073-2</div>
+                            <div style="width: 300px;">流入経路：TEL</div>
+                            <div style="width: 250px;">DX/IT推進</div>
+                        </div>
+                        <div class="class1">
+                            <div style="width: 300px;">ステータス：見積送信</div>
+                            <div style="width: 350px;">見積日：2020/05/11</div>
+                            <div style="width: 300px;"></div>
+                            <div style="width: 250px;">八木保光</div>
+                        </div>
+                    </div>
+                    <div class="detail4">
+                        <div>302-ADP　4.4オンス　ドライポロシャツ</div>
+                    </div> 
+
                 </div>
             </div>
 
