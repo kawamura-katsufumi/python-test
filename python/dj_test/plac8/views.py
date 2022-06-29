@@ -4,14 +4,16 @@ from.models import Customer,Recieve,Item
 
 
 def index(request):
+    def left():
+        pass
     return render(request,"plac8/index.html")
 
 def top(request):
     return render(request,"plac8/top.html")
 
 def left(request):
-    return render(request,"plac8/left.html")
-
+    return render(request,"plac8/left.html",{"tt":"leftで変数を取って、ここで処理するしか方法がない"})
+    
 def right(request):
     return render(request,"plac8/right.html")
 
