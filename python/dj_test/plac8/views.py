@@ -11,7 +11,7 @@ def index(request):
     return render(request,"plac8/index.html")
 
 def top(request):
-    return render(request,"plac8/index.html")
+    return render(request,"plac8/top.html")
 
 def left(request):
     items=Customer.objects.all()
