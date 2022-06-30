@@ -16,32 +16,41 @@
 
 </head>
 <body>
-    {{test}}
-    <div style="width: 500px;">
-      <form action="{% url 'plac8:upload' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="class1">
-          <input class="form-control" type="file" name="excel" value="" required>
-          <input type="submit" name="btn_upload" value="UPLOAD" style="margin-left: 20px;">
-        </div>
-      </form>
-    </div>
+  <div align="center">
+    <div style="width: 80%;">
 
-    <div class="mt-4">
-        <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
+        <div class="class1 mt-5">
+			
+			<div>
+				<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="#">Active</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+				</li>
+				</ul>
+			</div>
+			
+			<div style="width: 400px; margin-left: 200px;">
+				{{test}}
+				<form action="{% url 'plac8:upload' %}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="class1">
+					<input class="form-control" type="file" name="excel" value="" required>
+					<input type="submit" name="btn_upload" value="取込" style="margin-left: 20px;">
+				</div>
+				</form>
+			</div>
+
+        </div>
     </div>
+  </div>
 </body>
 </html>
