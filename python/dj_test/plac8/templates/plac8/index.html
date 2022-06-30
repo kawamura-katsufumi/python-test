@@ -19,7 +19,7 @@
         flex-direction: row;
         height: 600px;
     }
-    .if_top{
+    .ifr{
         border: solid;
     }
     </style>
@@ -27,11 +27,11 @@
 <body>
     <div class="base">
         <div class="class1">
-            <iframe src="{% url 'plac8:top' %}" width="100%" class="if_top"></iframe>
+            <iframe src="{% url 'plac8:top' %}" width="100%" class="ifr"></iframe>
         </div>
         <div class="class2">
-            <iframe src="{% url 'plac8:left' %}" width="70%" class="if_top"></iframe>
-            <iframe src="{% url 'plac8:right' %}" width="30%" class="if_top"></iframe>
+            <iframe src="{% url 'plac8:left' %}"  width="70%"class="ifr"></iframe>
+            <iframe src="{% url 'plac8:right' %}" width="400px" class="ifr"></iframe>
             </div>           
         </div>       
     </div>
