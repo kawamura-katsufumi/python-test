@@ -89,7 +89,7 @@ def upload(request):
                     "eigyou_sei":i[6],
                     "eigyou_mei":i[7],
                     "eigyou_busho":i[8],
-                    "rec_cus_id":i[9],
+                    "rec_cus_id":Customer.objects.get(cus_id=i[9]),
                     "keiro":i[10],
                     "mitsu_money":i[11],
                 }                
@@ -109,7 +109,7 @@ def upload(request):
 
         for i in all_data:
             Item.objects.create(
-                item_rec_id=i[0],
+                item_rec_id=Recieve.objects.get(rec_id=i[0]),
                 item_name=i[1],           
             )
 

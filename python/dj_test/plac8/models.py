@@ -42,7 +42,7 @@ class Recieve(models.Model):
     eigyou_sei=models.CharField("担当_姓",max_length=10,null=True)
     eigyou_mei=models.CharField("担当_名",max_length=10,null=True)
     eigyou_busho=models.CharField("営業部署",max_length=20,null=True)
-    rec_cus_id=models.CharField("顧客ID",max_length=10,null=True)
+    rec_cus_id=models.ForeignKey(Customer,verbose_name="顧客ID",on_delete=models.CASCADE,null=True)
     keiro=models.CharField("流入経路",max_length=10,null=True)
     mitsu_money=models.IntegerField("見積金額",null=True)
 
@@ -50,7 +50,7 @@ class Recieve(models.Model):
         return self.rec_id
 
 class Item(models.Model):
-    item_rec_id=models.CharField("見積ID",max_length=10,null=True)
+    item_rec_id=models.ForeignKey(Recieve,verbose_name="見積ID",on_delete=models.CASCADE,null=True)
     item_name=models.CharField("品名",max_length=100,null=True)
 
     def __str__(self):
