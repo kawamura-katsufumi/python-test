@@ -1,18 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import openpyxl
 from.models import Customer,Recieve,Item
 
 
 def index(request):
+
     def left():
         pass
+
     return render(request,"plac8/index.html")
 
 def top(request):
-    return render(request,"plac8/top.html")
+    return render(request,"plac8/index.html")
 
 def left(request):
-    return render(request,"plac8/left.html",{"tt":"leftで変数を取って、ここで処理するしか方法がない"})
+    items=Customer.objects.all()
+    return render(request,"plac8/left.html",{"items":items})
     
 def right(request):
     return render(request,"plac8/right.html")
@@ -113,4 +116,5 @@ def upload(request):
                 item_name=i[1],           
             )
 
-    return render(request, 'plac8/index.html')
+
+    return render(request, 'plac8/top.html',{"test":"登録しました"})
