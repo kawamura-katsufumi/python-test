@@ -49,6 +49,7 @@ class Recieve(models.Model):
     def __str__(self):
         return self.rec_id
 
+
 class Item(models.Model):
     item_rec_id=models.ForeignKey(Recieve,verbose_name="見積ID",on_delete=models.CASCADE,null=True)
     item_name=models.CharField("品名",max_length=100,null=True)
