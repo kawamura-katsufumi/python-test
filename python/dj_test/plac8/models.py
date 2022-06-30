@@ -1,7 +1,7 @@
 from django.db import models
 
 class Customer(models.Model):
-    cus_id=models.CharField("顧客ID",max_length=10)
+    cus_id=models.CharField("顧客ID",max_length=10,null=True)
     sei=models.CharField("姓",max_length=10,null=True)
     mei=models.CharField("名",max_length=10,null=True)
     sei_kana=models.CharField("姓かな",max_length=10,null=True)
@@ -33,7 +33,7 @@ class Customer(models.Model):
 
 
 class Recieve(models.Model):
-    rec_id=models.CharField("見積ID",max_length=10)
+    rec_id=models.CharField("見積ID",max_length=10,null=True)
     rec_no=models.CharField("見積番号",max_length=10,null=True)
     rec_ver=models.CharField("バージョン",max_length=10,null=True)
     status=models.CharField("ステータス",max_length=10,null=True)
@@ -50,8 +50,8 @@ class Recieve(models.Model):
         return self.rec_id
 
 class Item(models.Model):
-    item_rec_id=models.CharField("見積ID",max_length=10)
-    item_name=models.CharField("品名",max_length=100)
+    item_rec_id=models.CharField("見積ID",max_length=10,null=True)
+    item_name=models.CharField("品名",max_length=100,null=True)
 
     def __str__(self):
         return self.item_name

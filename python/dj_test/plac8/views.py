@@ -109,8 +109,8 @@ def upload(request):
 
         for i in all_data:
             Item.objects.create(
-                    item_rec_id=i[0],
-                    item_name=i[1],           
+                item_rec_id=i[0],
+                item_name=i[1],           
             )
 
     return render(request, 'plac8/index.html')
