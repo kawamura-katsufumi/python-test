@@ -14,8 +14,8 @@ def top(request):
     return render(request,"plac8/top.html")
 
 def left(request):
-    items=Customer.objects.all()
-    return render(request,"plac8/left.html",{"items":items})
+    cusms=Customer.objects.all()
+    return render(request,"plac8/left.html",{"cusms":cusms})
     
 def right(request):
     return render(request,"plac8/right.html")
@@ -81,14 +81,14 @@ def upload(request):
 
         for i in all_data:
             Recieve.objects.update_or_create(
-                rec_id=i[0],
+                rec_id=i[0],               
                 defaults={
                     "rec_id":i[0],
                     "rec_no":i[1],
                     "rec_ver":i[2],
                     "status":i[3],
-                    "mitsu_day":i[4],
-                    "rec_day":i[5],
+                    "mitsu_day":str(i[4])[:10],
+                    "rec_day":str(i[5])[:10],
                     "eigyou_sei":i[6],
                     "eigyou_mei":i[7],
                     "eigyou_busho":i[8],

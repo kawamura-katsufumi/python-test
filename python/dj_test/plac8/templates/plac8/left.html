@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,16 +23,6 @@
         border-radius: 9px;
         text-align: left;
     }
-    .main2{
-        padding: 0.5em 1em;
-        margin: 2em 0;
-        color: #FFF;
-        background: #6eb7ff;
-        border-bottom: solid 6px #3f87ce;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-        border-radius: 9px;
-        text-align: left;
-    }
     .detail2{
         font-size: 0.9em;
         background-color: rgb(220, 237, 241);
@@ -51,7 +42,6 @@
     .btn-sticky {
         font-size: 0.9em;
         display: inline-block;
-        /* padding: 0.5em 1em; */
         text-decoration: none;
         background: #fff;
         border: solid 1px #ff7c5c;
@@ -67,7 +57,6 @@
     .btn-sticky2 {
         font-size: 0.9em;
         display: inline-block;
-        /* padding: 0.5em 1em; */
         text-decoration: none;
         background: #fff;
         border: solid 1px #4dabf8;
@@ -80,180 +69,110 @@
         box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
         transform: translateY(2px);
     }
+    .status1{
+        margin: 0px 7px;
+        padding: 0px 5px;
+        font-size: 0.9em;
+        /* width: 50px; */
+        color: #bbb;
+        /* background-color: #faf0e6; */
+        /* border: 2px solid #bbb;
+        border-radius: 5px; */
+    }
 </style>
 </head>
 <body>
     <div align="center">
         <div style="width: 80%;">
 
+            {% for cus in cusms %}
             <div class="main">
                 <div class="class1">
                     <div style="width: 300px;">
-                        川村
+                        {% if cus.tantou %}
+                            {{cus.tantou}}
+                        {% endif %}
                     </div>
                     <div style="width: 500px;">
-                        株式会社プラスワンインターナショナル
+                        {{cus.com}}
                     </div>
-                    <div style="width: 400px;">
-                        レDM　レメール　レTEL
+                    <div class="class1" style="width: 400px;">
+                        <div class="status1">DM</div>
+                        <div class="status1">TEL</div>
+                        <div class="status1">外商</div>
                     </div>
                 </div>
                 <div class="class1">
                     <div style="width: 300px;">
-                        登録日：2022/10/5
+                        登録日：{{cus.toroku}}
                     </div>
                     <div style="width: 500px;">
-                        事業推進部　河野正臣
+                        {% if cus.busho %}
+                            {{cus.busho}}　{{cus.sei}}{{cus.mei}}
+                        {% else %}
+                            {{cus.sei}}{{cus.mei}}
+                        {% endif %}
                     </div>
                     <div style="width: 300px;">
-                        受注：1回　￥20,000
+                        {% if cus.kensu > 0 %}
+                            受注：{{cus.kensu}}回　{{cus.money | intcomma}}円
+                        {% endif %}
                     </div>
                     <div style="width: 100px;text-align: right;">
-                        <button class="detail btn-sticky">詳細</button>
+                        {% if cus.recieve_set.all %}
+                            {% if cus.kensu > 0 %}
+                                <button class="detail btn-sticky">詳細</button>
+                            {% else %}
+                                <button class="detail btn-sticky2">詳細</button>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
+
+                {% if cus.recieve_set.all %}
                 <div style="display: none;">
-                    <hr>
-                    <div class="detail2">
-                        <div class="class1">
-                            <div style="width: 300px;">見積金額：\77,000</div>
-                            <div style="width: 350px;">見積番号：0028073-1</div>
-                            <div style="width: 300px;">流入経路：TEL</div>
-                            <div style="width: 250px;">カスタマー事業部</div>
+                    {% for rec in cus.recieve_set.all %}
+                        <hr>
+                        {% if rec.rec_day != "None" %}
+                        <div class="detail3">
+                        {% else %}
+                        <div class="detail2">
+                        {% endif %}
+                            <div class="class1">
+                                <div style="width: 300px;">見積金額：{{rec.mitsu_money | intcomma}}円</div>
+                                <div style="width: 350px;">見積番号：{{rec.rec_no}}-{{rec.rec_ver}}</div>
+                                <div style="width: 300px;">流入経路：{{rec.keiro}}</div>
+                                <div style="width: 250px;">{{rec.eigyou_busho}}</div>
+                            </div>
+                            <div class="class1">
+                                <div style="width: 300px;">ステータス：{{rec.status}}</div>
+                                <div style="width: 350px;">見積日：{{rec.mitsu_day}}</div>
+                                <div style="width: 300px;">
+                                    {% if rec.rec_day != "None" %}
+                                        受注日：{{rec.rec_day}}
+                                    {% endif %}
+                                </div>
+                                <div style="width: 250px;">{{rec.eigyou_sei}}{{rec.eigyou_mei}}</div>
+                            </div>
                         </div>
-                        <div class="class1">
-                            <div style="width: 300px;">ステータス：見積送信</div>
-                            <div style="width: 350px;">見積日：2020/05/01</div>
-                            <div style="width: 300px;"></div>
-                            <div style="width: 250px;">田中レオト</div>
-                        </div>
-                    </div>
-                    <div class="detail4">
-                        <div>5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)</div>
-                        <div>351-AIP　3.5オンス　インターロックドライポロシャツ
-                        </div>
-                    </div>
 
-                    <hr>
-                    <div class="detail3">
-                        <div class="class1">
-                            <div style="width: 300px;">見積金額：\20,000</div>
-                            <div style="width: 350px;">見積番号：0028073-2</div>
-                            <div style="width: 300px;">流入経路：TEL</div>
-                            <div style="width: 250px;">カスタマー事業部</div>
+                        <div class="detail4">
+                            {% for pro in rec.item_set.all %}
+                                <div>{{pro.item_name}}</div>
+                            {% endfor %}
                         </div>
-                        <div class="class1">
-                            <div style="width: 300px;">ステータス：発送完了</div>
-                            <div style="width: 350px;">見積日：2020/05/11</div>
-                            <div style="width: 300px;">受注日：2020/05/12</div>
-                            <div style="width: 250px;">田中レオト</div>
-                        </div>
-                    </div>
-                    <div class="detail4">
-                        <div>302-ADP　4.4オンス　ドライポロシャツ</div>
-                    </div> 
-
-                    <hr>
-                    <div class="detail2">
-                        <div class="class1">
-                            <div style="width: 300px;">見積金額：\65,000</div>
-                            <div style="width: 350px;">見積番号：0028073-3</div>
-                            <div style="width: 300px;">流入経路：TEL</div>
-                            <div style="width: 250px;">カスタマー事業部</div>
-                        </div>
-                        <div class="class1">
-                            <div style="width: 300px;">ステータス：見積送信</div>
-                            <div style="width: 350px;">見積日：2020/06/01</div>
-                            <div style="width: 300px;"></div>
-                            <div style="width: 250px;">田中レオト</div>
-                        </div>
-                    </div>
-                    <div class="detail4">
-                        <div>5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)</div>
-                        <div>351-AIP　3.5オンス　インターロックドライポロシャツ</div>
-                        <div>5900　4.1oz　ドライアスレチックTシャツ</div>
-                    </div> 
-
-                </div>
-            </div>
-
-            <div class="main">
-                <div class="class1">
-                    <div style="width: 300px;">
-                        大西
-                    </div>
-                    <div style="width: 500px;">
-                        穂岐山刃物株式会社
-                    </div>
-                    <div style="width: 400px;">
-                        レDM　レメール　レTEL
-                    </div>
-                </div>
-                <div class="class1">
-                    <div style="width: 300px;">
-                        登録日：2022/10/5
-                    </div>
-                    <div style="width: 500px;">
-                        開発部　望田浩三
-                    </div>
-                    <div style="width: 300px;">
-                        
-                    </div>
-                    <div style="width: 100px;text-align: right;">
-                        <button class="detail btn-sticky2">詳細</button>
-                    </div>
-                </div>
-                <div style="display: none;">
-                    <hr>
-                    <div class="detail2">
-                        <div class="class1">
-                            <div style="width: 300px;">見積金額：\77,000</div>
-                            <div style="width: 350px;">見積番号：0028073-1</div>
-                            <div style="width: 300px;">流入経路：TEL</div>
-                            <div style="width: 250px;">DX/IT推進</div>
-                        </div>
-                        <div class="class1">
-                            <div style="width: 300px;">ステータス：見積送信</div>
-                            <div style="width: 350px;">見積日：2020/05/01</div>
-                            <div style="width: 300px;"></div>
-                            <div style="width: 250px;">八木保光</div>
-                        </div>
-                    </div>
-                    <div class="detail4">
-                        <div>5090-01　4.7ozドライシルキータッチポロシャツ(ローブリード)</div>
-                        <div>351-AIP　3.5オンス　インターロックドライポロシャツ
-                        </div>
-                    </div>
-
-                    <hr>
-                    <div class="detail2">
-                        <div class="class1">
-                            <div style="width: 300px;">見積金額：\20,000</div>
-                            <div style="width: 350px;">見積番号：0028073-2</div>
-                            <div style="width: 300px;">流入経路：TEL</div>
-                            <div style="width: 250px;">DX/IT推進</div>
-                        </div>
-                        <div class="class1">
-                            <div style="width: 300px;">ステータス：見積送信</div>
-                            <div style="width: 350px;">見積日：2020/05/11</div>
-                            <div style="width: 300px;"></div>
-                            <div style="width: 250px;">八木保光</div>
-                        </div>
-                    </div>
-                    <div class="detail4">
-                        <div>302-ADP　4.4オンス　ドライポロシャツ</div>
-                    </div> 
-
-                </div>
-            </div>
-
-            
-
+                                                 
+                    {% endfor %}
         
+                </div>
+                {% endif %}
 
+            </div>
+            {% endfor %}
 
         </div>
     </div>
+    
     <script>
 
         var det = document.querySelectorAll(".detail");
