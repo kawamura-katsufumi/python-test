@@ -120,3 +120,8 @@ def upload(request):
 
 
     return render(request, 'plac8/top.html',{"test":"登録しました"})
+
+
+def left_act(request,pk):
+    print(pk)
+    return render(request,"plac8/right.html")
