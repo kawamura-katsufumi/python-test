@@ -11,14 +11,16 @@
     .class1 {
         display: flex;
         flex-direction: row;
+		margin:0 auto; width: 80%;
     }
+	.class2{
+		display: flex;
+        flex-direction: row;
+	}
     </style>
 
 </head>
 <body>
-  <div align="center">
-    <div style="width: 80%;">
-
         <div class="class1 mt-5">
 			
 			<div>
@@ -42,7 +44,7 @@
 				{{test}}
 				<form action="{% url 'plac8:upload' %}" method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
-				<div class="class1">
+				<div class="class2">
 					<input class="form-control" type="file" name="excel" value="" required>
 					<input type="submit" name="btn_upload" value="取込" style="margin-left: 20px;">
 				</div>
@@ -50,7 +52,6 @@
 			</div>
 
         </div>
-    </div>
-  </div>
+
 </body>
 </html>
