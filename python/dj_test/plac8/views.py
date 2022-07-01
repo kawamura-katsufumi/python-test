@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 import openpyxl
-from.models import Customer,Recieve,Item
+from .models import Customer,Recieve,Item
+from .forms import Right_form
 
 
 def index(request):
@@ -18,7 +19,8 @@ def left(request):
     return render(request,"plac8/left.html",{"cusms":cusms})
     
 def right(request):
-    return render(request,"plac8/right.html")
+    form=Right_form()
+    return render(request,"plac8/right.html",{"form":form})
 
 
 
