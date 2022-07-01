@@ -5,10 +5,6 @@ from .forms import Right_form
 
 
 def index(request):
-
-    def left():
-        pass
-
     return render(request,"plac8/index.html")
 
 def top(request):
@@ -17,10 +13,29 @@ def top(request):
 def left(request):
     cusms=Customer.objects.all()
     return render(request,"plac8/left.html",{"cusms":cusms})
-    
+
+def left1(request,pk):
+    cusms=Customer.objects.all()
+    return render(request,"plac8/left.html",{"cusms":cusms})
+
 def right(request):
     form=Right_form()
     return render(request,"plac8/right.html",{"form":form})
+
+
+def right1(request,pk):
+    print(pk)
+    try:
+        ins=Customer.objects.get(pk=pk)
+        form=Right_form(ins)
+        print("right1 success")
+    except:
+        form=Right_form()
+        print("right1 falure")
+    
+    print(ins)
+    return render(request,"plac8/right.html",{"form":form})
+
 
 
 
@@ -120,8 +135,3 @@ def upload(request):
 
 
     return render(request, 'plac8/top.html',{"test":"登録しました"})
-
-
-def left_act(request,pk):
-    print(pk)
-    return render(request,"plac8/right.html")

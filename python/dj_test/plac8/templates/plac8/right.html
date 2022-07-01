@@ -64,22 +64,22 @@
             </form>
         </div>
         <hr>
-        <div class="data"><div class="name">顧客ID：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">会社名：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">部課名：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">氏名：</div><div class="data-code">aaaaaaaa</div></div>
+        <div class="data"><div class="name">顧客ID：</div><div class="data-code">{{cus.cus_id}}</div></div>
+        <div class="data"><div class="name">会社名：</div><div class="data-code">{{cus.com}}</div></div>
+        <div class="data"><div class="name">部課名：</div><div class="data-code">{{cus.busho}}</div></div>
+        <div class="data"><div class="name">氏名：</div><div class="data-code">{{cus.sei}} {{cus.mei}}（{{cus.sei_kana}} {{cus.mei_kana}}）</div></div>
 
-        <div class="data mt-3"><div class="name">郵便番号：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">住所：</div><div class="data-code">テキストテキストテキストテキストテキストテキストテキストテキストテキスト</div></div>
+        <div class="data mt-3"><div class="name">郵便番号：</div><div class="data-code">{{cus.yubin}}</div></div>
+        <div class="data"><div class="name">住所：</div><div class="data-code">{{cus.pref}}{{cus.city}}{{cus.banchi}}{{cus.build}}</div></div>
 
 
-        <div class="data mt-3"><div class="name">TEL：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">携帯：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">FAX：</div><div class="data-code">aaaaaaaa</div></div>
+        <div class="data mt-3"><div class="name">TEL：</div><div class="data-code">{{cus.tel}}</div></div>
+        <div class="data"><div class="name">携帯：</div><div class="data-code">{{cus.mob}}</div></div>
+        <div class="data"><div class="name">FAX：</div><div class="data-code">{{cus.fax}}</div></div>
 
-        <div class="data mt-3"><div class="name">メール1：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">メール2：</div><div class="data-code">aaaaaaaa</div></div>
-        <div class="data"><div class="name">メール3：</div><div class="data-code">aaaaaaaa</div></div>
+        <div class="data mt-3"><div class="name">メール1：</div><div class="data-code">{{cus.mail1}}</div></div>
+        <div class="data"><div class="name">メール2：</div><div class="data-code">{{cus.mail2}}</div></div>
+        <div class="data"><div class="name">メール3：</div><div class="data-code">{{cus.mail3}}</div></div>
 
     </div>
 
