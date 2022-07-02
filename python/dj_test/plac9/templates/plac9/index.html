@@ -20,7 +20,7 @@
     }
     .main {
         padding: 0.5em 1em;
-        margin: 0.5em 0;
+        margin: 0.7em 0;
         background: #FFF;
         border: solid 0.5px lightslategray;
         border-bottom: solid 4px lightslategray;
@@ -100,6 +100,7 @@
     }
     .set1 {
         border-bottom: dotted 1px #bbb ;
+        margin: 0.5em 0;
     }
     </style>
 
@@ -177,7 +178,13 @@
                             {{cus.sei}}{{cus.mei}}
                         {% endif %}
                     </div>
-                    <div style="width: 350px;">備考：</div>
+                    <div style="width: 350px; font-size:0.8em;">
+                        {% if cus.bikou %}
+                            備考：{{ cus.bikou| truncatechars:20 }}
+                        {% else %}
+                            備考：
+                        {% endif %}
+                    </div>
                     <div style="width: 150px;">
                         {% if cus.kensu > 0 %}
                             {{cus.money | intcomma}}円
@@ -218,24 +225,46 @@
                                 <div style="width: 250px;">
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">担当：</div>
-                                        <div><input type="text"></div>
+                                        {% if cus.tantou %} 
+                                            <div><input type="text" value="{{cus.tantou}}"></div>
+                                        {% else %}
+                                            <div><input type="text"></div>
+                                        {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">DM：</div>
-                                        <div><input type="text"></div>
+                                        {% if cus.dm_day %}
+                                            <div><input type="text" value="{{cus.dm_day}}"></div>
+                                        {% else %}
+                                            <div><input type="text"></div>
+                                        {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">TEL：</div>
-                                        <div><input type="text"></div>
+                                        {% if cus.tel_day %}
+                                            <div><input type="text" value="{{cus.tel_day}}"></div>
+                                        {% else %}
+                                            <div><input type="text"></div>
+                                        {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">外商：</div>
-                                        <div><input type="text"></div>
+                                        {% if cus.gaisho_day %}
+                                            <div><input type="text" value="{{cus.gaisho_day}}"></div>
+                                        {% else %}
+                                            <div><input type="text"></div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div>
                                     <div>備考：</div>
-                                    <div><textarea rows="5" cols="70"></textarea></div>
+                                    <div>
+                                        {% if cus.bikou %}
+                                            <textarea rows="5" cols="70">{{cus.bikou}}</textarea>
+                                        {% else %}
+                                            <textarea rows="5" cols="70"></textarea>
+                                        {% endif %}
+                                    </div>
                                 </div>
                                 <div style="margin-left: 20px;">
                                     <button class="btn btn-primary" style="margin-top: 65px;">更新</button>
