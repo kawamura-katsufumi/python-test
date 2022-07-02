@@ -2,39 +2,41 @@ from django.shortcuts import render,redirect
 import openpyxl
 from .models import Customer,Recieve,Item
 from .forms import Right_form
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.decorators.clickjacking import xframe_options_sameorigin
+
 
 
 def index(request):
     return render(request,"plac8/index.html")
 
+
 def top(request):
     return render(request,"plac8/top.html")
+
 
 def left(request):
     cusms=Customer.objects.all()
     return render(request,"plac8/left.html",{"cusms":cusms})
 
-def left1(request,pk):
-    cusms=Customer.objects.all()
-    return render(request,"plac8/left.html",{"cusms":cusms})
 
 def right(request):
+
     form=Right_form()
     return render(request,"plac8/right.html",{"form":form})
 
-
+@xframe_options_sameorigin
 def right1(request,pk):
     print(pk)
     try:
         ins=Customer.objects.get(pk=pk)
+        print(ins)
         form=Right_form(ins)
-        print("right1 success")
+        return render(request,"plac8/right.html",{"form":form})
     except:
         form=Right_form()
-        print("right1 falure")
-    
-    print(ins)
-    return render(request,"plac8/right.html",{"form":form})
+        return render(request,"plac8/right.html",{"form":form})
+
 
 
 

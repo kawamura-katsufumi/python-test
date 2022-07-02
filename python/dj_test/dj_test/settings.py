@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'plac6',
     'plac7',
     'plac8',
+    'plac9',
     'django_cleanup',
 ]
 
