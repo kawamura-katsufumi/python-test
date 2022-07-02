@@ -51,6 +51,7 @@ def upload(request):
                     "toroku":i[18],
                     "kensu":i[19],
                     "money":i[20],
+                    "adress":i[21],
                 }            
             )
         

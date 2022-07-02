@@ -10,6 +10,7 @@ class Customer(models.Model):
     mail2=models.EmailField("メール2",null=True,blank=True)
     mail3=models.EmailField("メール3",null=True,blank=True)
     yubin=models.CharField("郵便番号",max_length=10,null=True,blank=True)
+    adress=models.CharField("住所",max_length=100,null=True,blank=True)
     pref=models.CharField("都道府県",max_length=10,null=True,blank=True)
     city=models.CharField("市区町村",max_length=50,null=True,blank=True)
     banchi=models.CharField("番地",max_length=50,null=True,blank=True)
