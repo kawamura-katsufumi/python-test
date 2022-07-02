@@ -122,6 +122,7 @@
             </div>
         </header>
 
+        <!-- ###   リスト一覧   ###-->
         <div>
             {% for cus in cusms %}
             <div class="main">
@@ -134,15 +135,21 @@
                     <div style="width: 500px;">
                         {{cus.com}}
                     </div>
-                    <div class="class1" style="width: 400px;">
+                    <div style="width: 350px;">
+                        登録日：{{cus.toroku}}
+                    </div>
+                    <div style="width: 150px;">
+                        {% if cus.kensu > 0 %}
+                            受注：{{cus.kensu}}回
+                        {% endif %}
+                    </div>
+                    <div style="width: 80px"></div>
+                </div>
+                <div class="class1">
+                    <div class="class1" style="width: 300px;">                        
                         <div class="status1">DM</div>
                         <div class="status1">TEL</div>
                         <div class="status1">外商</div>
-                    </div>
-                </div>
-                <div class="class1">
-                    <div style="width: 300px;">
-                        登録日：{{cus.toroku}}
                     </div>
                     <div style="width: 500px;">
                         {% if cus.busho %}
@@ -151,12 +158,13 @@
                             {{cus.sei}}{{cus.mei}}
                         {% endif %}
                     </div>
-                    <div style="width: 300px;">
+                    <div style="width: 350px;">備考：</div>
+                    <div style="width: 150px;">
                         {% if cus.kensu > 0 %}
-                            受注：{{cus.kensu}}回　{{cus.money | intcomma}}円
+                            {{cus.money | intcomma}}円
                         {% endif %}
                     </div>
-                    <div style="width: 100px;text-align: right;">
+                    <div style="width: 80px;text-align: right;">
                         {% if cus.recieve_set.all %}
                             {% if cus.kensu > 0 %}
                                 <button class="detail btn-sticky">詳細</button>

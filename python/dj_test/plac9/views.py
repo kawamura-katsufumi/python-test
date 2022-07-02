@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from plac8.models import Customer,Recieve,Item
+from django.shortcuts import render,redirect
+from .models import Customer,Recieve,Item
 import openpyxl
 
 
@@ -103,5 +103,5 @@ def upload(request):
             )
 
 
-    return render(request, 'plac9/index.html',{"test":"登録しました"})
+    return redirect("plac9:index")
 
