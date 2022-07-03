@@ -267,34 +267,51 @@
                                 <div style="width: 250px;">
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">担当：</div>
-                                        {% if cus.tantou %} 
-                                            <div><input type="text" value="{{cus.tantou}}"></div>
-                                        {% else %}
-                                            <div><input type="text"></div>
-                                        {% endif %}
+                                        <div>
+                                            <select>
+                                                <option value=""></option>
+                                                {% if cus.tantou == "井上" %}
+                                                    <option value="井上" selected>井上</option>
+                                                {% else %}
+                                                    <option value="井上">井上</option>
+                                                {% endif %}
+
+                                                {% if cus.tantou == "古川" %}
+                                                    <option value="古川" selected>古川</option>
+                                                {% else %}
+                                                    <option value="古川">古川</option>
+                                                {% endif %}
+
+                                                {% if cus.tantou == "眞下" %}
+                                                    <option value="眞下" selected>眞下</option>
+                                                {% else %}
+                                                    <option value="眞下">眞下</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">DM：</div>
                                         {% if cus.dm_day %}
-                                            <div><input type="text" value="{{cus.dm_day}}"></div>
+                                            <div><input type="date" value="{{cus.dm_day}}"></div>
                                         {% else %}
-                                            <div><input type="text"></div>
+                                            <div><input type="date" value=""></div>
                                         {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">TEL：</div>
                                         {% if cus.tel_day %}
-                                            <div><input type="text" value="{{cus.tel_day}}"></div>
+                                            <div><input type="date" value="{{cus.tel_day}}"></div>
                                         {% else %}
-                                            <div><input type="text"></div>
+                                            <div><input type="date"></div>
                                         {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">外商：</div>
                                         {% if cus.gaisho_day %}
-                                            <div><input type="text" value="{{cus.gaisho_day}}"></div>
+                                            <div><input type="date" value="{{cus.gaisho_day}}"></div>
                                         {% else %}
-                                            <div><input type="text"></div>
+                                            <div><input type="date"></div>
                                         {% endif %}
                                     </div>
                                 </div>
