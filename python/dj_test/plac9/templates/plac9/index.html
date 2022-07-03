@@ -207,16 +207,58 @@
                 <div style="display: none;">
                     <hr>
                     <div style="font-size: 0.9em;">
-                        <div class="set1">住所：{{cus.adress}}</div>
+                        <div class="set1">
+                            {% if cus.adress %}
+                                住所：{{cus.adress}}
+                            {% else %}
+                                住所：
+                            {% endif %}
+                        </div>
                         <div class="class1 set1" >
-                            <div style="width: 440px;"> 電話：{{cus.tel}}</div>
-                            <div style="width: 440px;"> 携帯：{{cus.mob}}</div>
-                            <div style="width: 440px;"> FAX：{{cus.fax}}</div>
+                            <div style="width: 440px;">
+                                {% if cus.tel %}
+                                    電話：{{cus.tel}}
+                                {% else %}
+                                    電話：
+                                {% endif %}
+                            </div>
+                            <div style="width: 440px;">
+                                {% if cus.mob %}
+                                    携帯：{{cus.mob}}
+                                {% else %}
+                                    携帯：
+                                {% endif %}
+                            </div>
+                            <div style="width: 440px;">
+                                {% if cus.fax %}
+                                    FAX：{{cus.fax}}
+                                {% else %}
+                                    FAX：
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="class1 set1">
-                            <div style="width: 440px;"> メール1：{{cus.mail1}}</div>
-                            <div style="width: 440px;"> メール2：{{cus.mail2}}</div>
-                            <div style="width: 440px;"> メール3：{{cus.mail3}}</div>
+                            <div style="width: 440px;">
+                                {% if cus.mail1 %}
+                                    メール1：{{cus.mail1}}
+                                {% else %}
+                                    メール1：
+                                {% endif %}
+                            </div>
+                            <div style="width: 440px;">
+                                {% if cus.mail2 %}
+                                    メール2：{{cus.mail2}}
+                                {% else %}
+                                    メール2：
+                                {% endif %}
+                            </div>
+                            <div style="width: 440px;">
+                                {% if cus.mail3 %}
+                                    メール3：{{cus.mail3}}
+                                {% else %}
+                                    メール3：
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                     <div class="mt-3">
