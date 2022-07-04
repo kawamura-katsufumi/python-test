@@ -106,10 +106,10 @@
 
 </head>
     <body>
-        <div style="margin:0 auto; width: 80%;">
+    <div style="margin:0 auto; width: 80%;">
         <header>
             <div class="head mt-5 mb-4">
-                
+
                 <div>
                     <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -262,13 +262,15 @@
                         </div>
                     </div>
                     <div class="mt-3">
-                        <form action="" method="post">{% csrf_token %}
+
+                        <form action="{% url 'plac9:koshin' cus.pk %}" method="post">{% csrf_token %}
+
                             <div class="class1">                        
                                 <div style="width: 250px;">
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">担当：</div>
                                         <div>
-                                            <select>
+                                            <select name="tantou">
                                                 <option value=""></option>
                                                 {% if cus.tantou == "井上" %}
                                                     <option value="井上" selected>井上</option>
@@ -326,7 +328,9 @@
                                     </div>
                                 </div>
                                 <div style="margin-left: 20px;">
-                                    <button class="btn btn-primary" style="margin-top: 65px;">更新</button>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary" style="margin-top: 65px;">更新</button>
+                                    </div>
                                 </div>                         
                             </div>
                         </form>
@@ -376,35 +380,63 @@
             {% endfor %}
         </div>
 
+        </div>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
 
-            // 詳細ボタン
-            var det = document.querySelectorAll(".detail");
-                
-            for(var i = 0; i < det.length; i++){
-                det[i].addEventListener('click',function(){
-                    oya=this.parentNode.parentNode;
-                    yatsu=oya.nextElementSibling;
-    
-                    if (yatsu.style.display == "none"){
-                        yatsu.style.display="block";
-                        this.innerText="戻す";
-                    } else {
-                        yatsu.style.display="none";
-                        this.innerText="詳細";
-                    };
-                },false);
+        // 詳細ボタン
+        var det = document.querySelectorAll(".detail");
+            
+        for(var i = 0; i < det.length; i++){
+            det[i].addEventListener('click',function(){
+                oya=this.parentNode.parentNode;
+                yatsu=oya.nextElementSibling;
+
+                if (yatsu.style.display == "none"){
+                    yatsu.style.display="block";
+                    this.innerText="戻す";
+                } else {
+                    yatsu.style.display="none";
+                    this.innerText="詳細";
+                };
+            },false);
+        }
+
+
+        // スクロールの位置
+        var positionY;					/* スクロール位置のY座標 */
+        var STORAGE_KEY = "scrollY";	/* ローカルストレージキー */
+
+        /*
+        * checkOffset関数: 現在のスクロール量をチェックしてストレージに保存
+        */
+        function checkOffset(){
+            positionY = window.pageYOffset;
+            localStorage.setItem(STORAGE_KEY, positionY);
+        }
+
+        /*
+        * 起動時の処理
+        *
+        *		ローカルストレージをチェックして前回のスクロール位置に戻す
+        */
+        window.addEventListener("load", function(){
+            // ストレージチェック
+            positionY = localStorage.getItem(STORAGE_KEY);
+
+            // 前回の保存データがあればスクロールする
+            if(positionY !== null){
+                scrollTo(0, positionY);
             }
-    
+
+            // スクロール時のイベント設定
+            window.addEventListener("scroll", checkOffset, false);
+        });
+        
+
         </script>
 
-
-
-
-
-
-
-    </div>
-</body>
+   
+    </body>
 </html>

@@ -1,11 +1,20 @@
 from django.shortcuts import render,redirect
 from .models import Customer,Recieve,Item
 import openpyxl
+from django.http.response import JsonResponse
 
 
 def index(request):
     cusms=Customer.objects.all()
     return render(request,"plac9/index.html",{"cusms":cusms})
+
+
+def koshin(request,pk):
+    tantou=request.POST["tantou"]
+    print(pk)
+    print(tantou)
+    return redirect("plac9:index")
+
 
 
 def upload(request):
