@@ -10,15 +10,25 @@ def index(request):
 
 
 def koshin(request,pk):
-    tantou=request.POST["tantou"]
-    print(pk)
-    print(tantou)
+    tantou=request.POST.get("tantou")
+    dm=request.POST.get("dm")
+    tel=request.POST.get("tel")
+    gaisho=request.POST.get("gaisho")
+    bikou=request.POST.get("bikou")
+
+    result=Customer.objects.get(pk=pk)
+    result.tantou=tantou
+    result.dm_day=dm
+    result.tel_day=tel
+    result.gaisho_day=gaisho
+    result.bikou=bikou
+    result.save()
+
     return redirect("plac9:index")
 
 
 
 def upload(request):
-    context = {}
     if request.method == 'POST' and request.FILES['excel']:
         excel = request.FILES['excel']
         #excelの読み込み

@@ -90,18 +90,24 @@
         transform: translateY(2px);
     }
     .status1 {
-        /* margin: 0px 7px; */
         padding: 0px 5px;
         font-size: 0.9em;
         color: rgb(225, 225, 225);
-        /* background-color: #faf0e6;  */
-        /* border: 2px solid #bbb;
-        border-radius: 5px; */
+    }
+    .status2 {
+        margin: 0px 5px;
+        padding: 0px 5px;
+        font-size: 0.9em;
+        color: #fff;
+        background-color: #03820e;
+        border: 1px solid #03820e;
+        border-radius: 5px; 
     }
     .set1 {
         border-bottom: dotted 1px #bbb ;
         margin: 0.5em 0;
     }
+    
     </style>
 
 </head>
@@ -163,13 +169,29 @@
                             受注：{{cus.kensu}}回
                         {% endif %}
                     </div>
-                    <div style="width: 80px"></div>
+                    <div style="width: 80px">
+                        
+                    </div>
                 </div>
                 <div class="class1">
-                    <div class="class1" style="width: 200px;">                        
+                    <div class="class1" style="width: 200px;">
+                        {% if cus.dm_day %}
+                            <div class="status2">DM</div>
+                        {% else %}
                         <div class="status1">DM</div>
-                        <div class="status1">TEL</div>
-                        <div class="status1">外商</div>
+                        {% endif %}
+
+                        {% if cus.tel_day %}
+                            <div class="status2">TEL</div>
+                        {% else %}
+                            <div class="status1">TEL</div>
+                        {% endif %}
+
+                        {% if cus.gaisho_day %}
+                            <div class="status2">外商</div>
+                        {% else %}
+                            <div class="status1">外商</div>
+                        {% endif %}
                     </div>
                     <div style="width: 550px;">
                         {% if cus.busho %}
@@ -295,25 +317,25 @@
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">DM：</div>
                                         {% if cus.dm_day %}
-                                            <div><input type="date" value="{{cus.dm_day}}"></div>
+                                            <div><input type="date" name="dm" value="{{cus.dm_day}}"></div>
                                         {% else %}
-                                            <div><input type="date" value=""></div>
+                                            <div><input type="date" name="dm"></div>
                                         {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">TEL：</div>
                                         {% if cus.tel_day %}
-                                            <div><input type="date" value="{{cus.tel_day}}"></div>
+                                            <div><input type="date" name="tel" value="{{cus.tel_day}}"></div>
                                         {% else %}
-                                            <div><input type="date"></div>
+                                            <div><input type="date" name="tel"></div>
                                         {% endif %}
                                     </div>
                                     <div class="class1 mt-2">
                                         <div style="width:50px; text-align: right">外商：</div>
                                         {% if cus.gaisho_day %}
-                                            <div><input type="date" value="{{cus.gaisho_day}}"></div>
+                                            <div><input type="date" name="gaisho" value="{{cus.gaisho_day}}"></div>
                                         {% else %}
-                                            <div><input type="date"></div>
+                                            <div><input type="date" name="gaisho"></div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -321,9 +343,9 @@
                                     <div>備考：</div>
                                     <div>
                                         {% if cus.bikou %}
-                                            <textarea rows="5" cols="70">{{cus.bikou}}</textarea>
+                                            <textarea rows="5" cols="50" name="bikou">{{cus.bikou}}</textarea>
                                         {% else %}
-                                            <textarea rows="5" cols="70"></textarea>
+                                            <textarea rows="5" cols="50" name="bikou"></textarea>
                                         {% endif %}
                                     </div>
                                 </div>
