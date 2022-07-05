@@ -1,12 +1,39 @@
 from django.shortcuts import render,redirect
 from .models import Customer,Recieve,Item
 import openpyxl
-from django.http.response import JsonResponse
+
 
 
 def index(request):
-    cusms=Customer.objects.all()
+    if "hyouji" in request.session:
+        hyouji=request.session["hyouji"]
+    else:
+        request.session["hyouji"]="全て"
+        hyouji="全て"
+
+    if hyouji=="全て":
+        cusms=Customer.objects.all()
+    else:
+        cusms=Customer.objects.filter(tantou=hyouji)
+
     return render(request,"plac9/index.html",{"cusms":cusms})
+
+
+def hyouji_all(request):
+    request.session["hyouji"]="全て"
+    return redirect("plac9:index")
+
+def hyouji_inoue(request):
+    request.session["hyouji"]="井上"
+    return redirect("plac9:index")
+
+def hyouji_furukawa(request):
+    request.session["hyouji"]="古川"
+    return redirect("plac9:index")
+
+def hyouji_mashimo(request):
+    request.session["hyouji"]="眞下"
+    return redirect("plac9:index")
 
 
 def koshin(request,pk):
