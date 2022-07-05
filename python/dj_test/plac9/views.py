@@ -28,7 +28,7 @@ def koshin(request,pk):
 
 
 def delete(request,pk):
-    Customer.objects.get(pk=pk).delete
+    Customer.objects.get(pk=pk).delete()
     return redirect("plac9:index")
 
 
