@@ -8,6 +8,6 @@ urlpatterns = [
     path('top/', top, name="top"),
     path('left/', left, name="left"),
     path('right/', right, name="right"),
-    path('right/<int:pk>', right1, name="right1"),
+    path('right/<int:pk>/', right1, name="right1"),
     path('upload/', upload, name="upload"),
 ]

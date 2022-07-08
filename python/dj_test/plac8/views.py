@@ -21,21 +21,16 @@ def left(request):
 
 
 def right(request):
-
     form=Right_form()
     return render(request,"plac8/right.html",{"form":form})
 
-@xframe_options_sameorigin
+
 def right1(request,pk):
     print(pk)
-    try:
-        ins=Customer.objects.get(pk=pk)
-        print(ins)
-        form=Right_form(ins)
-        return render(request,"plac8/right.html",{"form":form})
-    except:
-        form=Right_form()
-        return render(request,"plac8/right.html",{"form":form})
+    ins=Customer.objects.get(pk=pk)
+    form=Right_form(instance=ins)
+    return render(request,"plac8/right.html",{"form":form})
+
 
 
 
