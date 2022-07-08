@@ -85,7 +85,7 @@
 
             {% for cus in cusms %}
             <div class="main">
-                <form action="{% url 'plac8:right1' cus.pk %}">{% csrf_token %}</form>
+                <form action="{% url 'plac8:right1' cus.pk %}" target="ifr2">{% csrf_token %}</form>
                 <div class="class1">
                     <div style="width: 300px;">
                         {% if cus.tantou %}
