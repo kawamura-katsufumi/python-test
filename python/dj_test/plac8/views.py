@@ -28,7 +28,7 @@ def right(request,pk):
         cus=Customer.objects.filter(pk=pk)
         print("ok2")
         print(cus)
-        # form=Right_form(instance=ins)
+        # form=Right_form(request.POST,instance=ins)
         print("ok3")
         return render(request,"plac8/right.html",{"cus":cus})
     except:

@@ -17,12 +17,14 @@
             padding: 0.5em 1em;
             margin: 0 auto;
             margin-top: 0.5em;
-            color: #5d627b;
+            /* color: rgb(71, 71, 71); */
             background: #FFF;
-            border: solid 5px #0b5f1a;
+            border: solid 1px #0b5f1a;
             border-radius: 10px;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.22);
             width: 380px;
+            box-shadow: 0 0 3px 3px #0e7722;
+            /* box-shadow: 0 0 2px 2px #0e7722, 0 0 1px 1px #0e7722 inset; */
         }
         .data{
             display: flex;
@@ -49,7 +51,7 @@
                         <div>{{form.tantou}}</div>
                     </div>
                     <div style="width: 50%;" align="right" >
-                        <button type="submit" class="btn btn-primary">更新</button>
+                        <button type="submit" class="btn btn-s">更新</button>
                     </div>
                 </div>
                 <div class="class1 mt-3">
@@ -64,24 +66,88 @@
             </form>
         </div>
         <hr>
-        {% for i in cus %}
-        <div class="data"><div class="name">顧客ID：</div><div class="data-code">{{i.cus_id}}</div></div>
-        <div class="data"><div class="name">会社名：</div><div class="data-code">{{i.com}}</div></div>
-        <div class="data"><div class="name">部課名：</div><div class="data-code">{{i.busho}}</div></div>
-        <div class="data"><div class="name">氏名：</div><div class="data-code">{{i.sei}} {{i.mei}}（{{i.sei_kana}} {{i.mei_kana}}）</div></div>
+        <div style="font-size: 0.9em;">
+            {% for i in cus %}
+          
+            <div class="data">
+                <div class="name">会社名：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.com}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">部課名：</div>
+                {% if i.com %}
+                <div class="data-code">{{i.busho}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">氏名：</div>
+                {% if i.com %}
+                <div class="data-code">{{i.sei}} {{i.mei}}（{{i.sei_kana}} {{i.mei_kana}}）</div>
+                {% endif %}
+            </div>
 
-        <div class="data mt-3"><div class="name">郵便番号：</div><div class="data-code">{{i.yubin}}</div></div>
-        <div class="data"><div class="name">住所：</div><div class="data-code">{{i.pref}}{{i.city}}{{i.banchi}}{{i.build}}</div></div>
+            <div class="data mt-3">
+                <div class="name">郵便番号：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.yubin}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">住所：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.pref}}{{i.city}}{{i.banchi}}{{i.build}}</div>
+                {% endif %}
+            </div>
 
+            <div class="data mt-3">
+                <div class="name">TEL：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.tel}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">携帯：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.mob}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">FAX：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.fax}}</div>
+                {% endif %}
+            </div>
 
-        <div class="data mt-3"><div class="name">TEL：</div><div class="data-code">{{i.tel}}</div></div>
-        <div class="data"><div class="name">携帯：</div><div class="data-code">{{i.mob}}</div></div>
-        <div class="data"><div class="name">FAX：</div><div class="data-code">{{i.fax}}</div></div>
+            <div class="data mt-3">
+                <div class="name">メール1：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.mail1}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">メール2：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.mail2}}</div>
+                {% endif %}
+            </div>
+            <div class="data">
+                <div class="name">メール3：</div>
+                {% if i.com %}
+                    <div class="data-code">{{i.mail3}}</div>
+                {% endif %}
+            </div>
+            <br>
+            <div class="data">
+                <div class="name">顧客ID：</div>
+                {% if i.cus_id != "None" %}
+                    <div class="data-code">{{i.cus_id}}</div>
+                {% endif %}
+            </div>
 
-        <div class="data mt-3"><div class="name">メール1：</div><div class="data-code">{{i.mail1}}</div></div>
-        <div class="data"><div class="name">メール2：</div><div class="data-code">{{i.mail2}}</div></div>
-        <div class="data"><div class="name">メール3：</div><div class="data-code">{{i.mail3}}</div></div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
 </body>
