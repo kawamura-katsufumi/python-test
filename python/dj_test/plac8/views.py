@@ -20,15 +20,27 @@ def left(request):
     return render(request,"plac8/left.html",{"cusms":cusms})
 
 
-def right(request):
-    form=Right_form()
-    return render(request,"plac8/right.html",{"form":form})
+def right(request,pk):
+    print(pk)
+    try:
+        ins=Customer.objects.filter(pk=pk)
+        print("ok1")
+        cus=Customer.objects.filter(pk=pk)
+        print("ok2")
+        print(cus)
+        # form=Right_form(instance=ins)
+        print("ok3")
+        return render(request,"plac8/right.html",{"cus":cus})
+    except:
+        print("no")
+        form=Right_form()
+        return render(request,"plac8/right.html",{"form":form})
 
 
 def right1(request,pk):
     print(pk)
     ins=Customer.objects.get(pk=pk)
-    form=Right_form(instance=ins)
+    form=Right_form(request.POST, instance=ins)
     return render(request,"plac8/right.html",{"form":form})
 
 
