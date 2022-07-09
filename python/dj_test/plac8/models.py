@@ -25,9 +25,9 @@ class Customer(models.Model):
     kensu=models.IntegerField("件数",null=True,blank=True)
     money=models.IntegerField("金額",null=True,blank=True)
     tantou=models.CharField("担当",max_length=10,choices=choi,null=True,blank=True)
-    check_dm=models.BooleanField("DM",default=False,blank=True)
-    check_tel=models.BooleanField("TEL",default=False,blank=True)
-    check_gaisho=models.BooleanField("外商",default=False,blank=True)
+    dm_day=models.CharField("DM",max_length=20,null=True,blank=True)
+    tel_day=models.CharField("TEL",max_length=20,null=True,blank=True)
+    gaisho_day=models.CharField("外商",max_length=20,null=True,blank=True)
     bikou=models.TextField("備考",null=True,blank=True)
 
     def __str__(self):

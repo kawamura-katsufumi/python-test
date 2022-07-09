@@ -7,7 +7,7 @@ urlpatterns = [
     path('index/', index, name="index"),
     path('top/', top, name="top"),
     path('left/', left, name="left"),
-    path('right/<int:pk>/', right, name="right"),
+    path('right/', right, name="right"),
     path('right/<int:pk>/', right1, name="right1"),
     path('upload/', upload, name="upload"),
 ]

@@ -74,9 +74,15 @@
         padding: 0px 5px;
         font-size: 0.9em;
         color: rgb(225, 225, 225);
-        /* background-color: #faf0e6;  */
-        /* border: 2px solid #bbb;
-        border-radius: 5px; */
+    }
+    .status2 {
+        margin: 0px 7px;
+        padding: 0px 5px;
+        font-size: 0.9em;
+        color: #fff;
+        background-color: #bbb;
+        border: 1px solid #bbb;
+        border-radius: 5px; 
     }
 </style>
 </head>
@@ -85,7 +91,7 @@
 
             {% for cus in cusms %}
             <div class="main">
-                <form action="{% url 'plac8:right' cus.pk %}" target="ifr2">{% csrf_token %}</form>
+                <form action="{% url 'plac8:right1' cus.pk %}" target="ifr2">{% csrf_token %}</form>
                 <div class="class1">
                     <div style="width: 300px;">
                         {% if cus.tantou %}
@@ -96,9 +102,23 @@
                         {{cus.com}}
                     </div>
                     <div class="class1" style="width: 400px;">
-                        <div class="status1">DM</div>
-                        <div class="status1">TEL</div>
-                        <div class="status1">外商</div>
+                        {% if cus.dm_day %}
+                            <div class="status2">DM</div>
+                        {% else %}
+                            <div class="status1">DM</div>
+                        {% endif %}
+
+                        {% if cus.tel_day %}
+                            <div class="status2">TEL</div>
+                        {% else %}
+                            <div class="status1">TEL</div>
+                        {% endif %}
+
+                        {% if cus.gaisho_day %}
+                            <div class="status2">外商</div>
+                        {% else %}
+                            <div class="status1">外商</div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="class1">
@@ -202,6 +222,40 @@
                 form_left.submit();
             },false);
         }
+
+
+        // スクロールの位置
+        var positionY;					/* スクロール位置のY座標 */
+        var STORAGE_KEY = "scrollY";	/* ローカルストレージキー */
+
+        /*
+        * checkOffset関数: 現在のスクロール量をチェックしてストレージに保存
+        */
+        function checkOffset(){
+            positionY = window.pageYOffset;
+            localStorage.setItem(STORAGE_KEY, positionY);
+        }
+
+        /*
+        * 起動時の処理
+        *
+        *		ローカルストレージをチェックして前回のスクロール位置に戻す
+        */
+        window.addEventListener("load", function(){
+            // ストレージチェック
+            positionY = localStorage.getItem(STORAGE_KEY);
+
+            // 前回の保存データがあればスクロールする
+            if(positionY !== null){
+                scrollTo(0, positionY);
+            }
+
+            // スクロール時のイベント設定
+            window.addEventListener("scroll", checkOffset, false);
+        });
+        
+
+        </script>
 
     </script>
 

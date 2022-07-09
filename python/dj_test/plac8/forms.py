@@ -5,16 +5,17 @@ class Right_form(forms.ModelForm):
     tantou=forms.ChoiceField(
         choices=[("",""),("井上","井上"),("古川","古川"),("眞下","眞下"),("夏八木","夏八木")],
         label="担当者",
-        widget=forms.Select(attrs={"class":"form-select"})
+        widget=forms.Select(attrs={"class":"form-select"}),
+        required=False
     )
-    check_dm=forms.BooleanField(label="DM", widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),required=False)
-    check_tel=forms.BooleanField(label="TEL", widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),required=False)
-    check_gaisho=forms.BooleanField(label="外商", widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),required=False)
+    dm_day=forms.CharField(label="DM", widget=forms.DateInput(attrs={"type": "date"}),required=False)
+    tel_day=forms.CharField(label="TEL", widget=forms.DateInput(attrs={"type": "date"}),required=False)
+    gaisho_day=forms.CharField(label="外商", widget=forms.DateInput(attrs={"type": "date"}),required=False)
 
-    bikou=forms.CharField(label="備考",widget=forms.Textarea(attrs={"class":"form-control","rows":"3"}))
+    bikou=forms.CharField(label="備考",widget=forms.Textarea(attrs={"class":"form-control","rows":"3"}),required=False)
 
     class Meta:
         model=Customer
-        fields=["tantou","check_dm","check_tel","check_gaisho","bikou"]
+        fields=["tantou","dm_day","tel_day","gaisho_day","bikou"]
 
 
