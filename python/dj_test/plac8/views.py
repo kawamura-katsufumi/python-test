@@ -23,14 +23,15 @@ def left(request):
 def right(request,pk):
     print(pk)
     try:
-        ins=Customer.objects.filter(pk=pk)
+        ins=Customer.objects.get(pk=pk)
         print("ok1")
         cus=Customer.objects.filter(pk=pk)
         print("ok2")
         print(cus)
-        # form=Right_form(request.POST,instance=ins)
+        form=Right_form(instance=ins)
         print("ok3")
-        return render(request,"plac8/right.html",{"cus":cus})
+        # params={"form":form,"cus":cus}
+        return render(request,"plac8/right.html",{"form":form,"cus":cus})
     except:
         print("no")
         form=Right_form()
