@@ -215,12 +215,18 @@
 
         // 右フレームへ表示
         var ifr = document.querySelectorAll(".main");
+        var mae = null;
             
         for(var i = 0; i < ifr.length; i++){
             ifr[i].addEventListener('click',function(){
-                this.style.border = "solid 3px #38b508";
-                form_left=this.childNodes[1]
+                if (mae != null){
+                    mae.style="";
+                }
+                this.style = "margin:1.5em; border:solid 5px #32cd32; box-shadow: 5px 10px 5px #a9a9a9;";
+
+                form_left=this.childNodes[1];
                 form_left.submit();
+                mae=this;
             },false);
         }
 

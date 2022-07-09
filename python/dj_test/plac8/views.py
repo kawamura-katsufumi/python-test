@@ -38,6 +38,11 @@ def right1(request,pk):
         return render(request,"plac8/right.html",{"form":form,"cus":cus})
 
 
+def delete(request):
+    if request.method=="POST":
+        pk=request.POST["cus_id"]
+
+        return redirect("plac8:left")
 
 
 def upload(request):

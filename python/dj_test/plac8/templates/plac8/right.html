@@ -74,12 +74,24 @@
                     <div>備考：</div>
                     <div>{{form.bikou}}</div>
                 </div>
-            </form>
+            </form>       
         </div>
         <hr>
+        
+        {% for i in cus %}
+        <form action="{% url 'plac8:delete' %}" method="post" target="ifr1">{% csrf_token %}
+            <div class="class1 mt-3">
+                <div style="margin-left: 15px;">
+                    <label for="cus_id">顧客ID：</label>
+                    <input type="text" name="cus_id" id="cus_id" value="{{i.cus_id}}" style="width: 100px;">
+                </div>               
+                <div style="margin-left: 15px;">
+                    <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('本当に削除しますか？')">削除</button> 
+                </div>
+            </div>
+        </form>
+        <hr>
         <div style="font-size: 0.9em;">
-            {% for i in cus %}
-          
             <div class="data">
                 <div class="name">会社名：</div>
                 {% if i.com %}
