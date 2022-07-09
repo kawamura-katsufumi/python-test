@@ -218,6 +218,7 @@
             
         for(var i = 0; i < ifr.length; i++){
             ifr[i].addEventListener('click',function(){
+                this.style.border = "solid 3px #38b508";
                 form_left=this.childNodes[1]
                 form_left.submit();
             },false);
