@@ -51,7 +51,7 @@
                         <div>{{form.tantou}}</div>
                     </div>
                     <div style="width: 50%;" align="right" >
-                        <button type="submit" class="btn btn-success btn-s">更新</button>
+                        <button type="submit" class="btn btn-success">更新</button>
                     </div>
                 </div>
                 <div class="mt-3">
@@ -81,7 +81,7 @@
         {% for i in cus %}
         <form action="{% url 'plac8:delete' %}" method="post" target="_top">{% csrf_token %}
             <div class="class1 mt-3">
-                <div style="margin-left: 15px;">
+                <div style="margin-left: 20px;">
                     <label for="cus_id">顧客ID：</label>
                     <input type="text" name="cus_id" id="cus_id" value="{{i.cus_id}}" style="width: 100px;" readonly>
                 </div>               
