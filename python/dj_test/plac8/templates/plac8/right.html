@@ -79,7 +79,7 @@
         <hr>
         
         {% for i in cus %}
-        <form action="{% url 'plac8:delete' %}" method="post" target="ifr1">{% csrf_token %}
+        <form action="{% url 'plac8:delete' %}" method="post" target="_top">{% csrf_token %}
             <div class="class1 mt-3">
                 <div style="margin-left: 15px;">
                     <label for="cus_id">顧客ID：</label>

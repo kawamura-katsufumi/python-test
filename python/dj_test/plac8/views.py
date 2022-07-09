@@ -40,9 +40,9 @@ def right1(request,pk):
 
 def delete(request):
     if request.method=="POST":
-        pk=request.POST["cus_id"]
-
-        return redirect("plac8:left")
+        cus_id=request.POST["cus_id"]
+        Customer.objects.get(cus_id=cus_id).delete()
+        return redirect("plac8:index")
 
 
 def upload(request):
