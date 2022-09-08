@@ -1,11 +1,8 @@
 from django.urls import path
-from .views import omote,name,club,omote_test,delete
+from .views import index
 
 urlpatterns = [
-    path('omote/',omote,name="omote"),
-    path('omote/<int:num>/',omote,name="omote"),
-    path('name/',name,name="name"),
-    path('club/',club,name="club"),
-    path('omote_test/',omote_test,name="omote_test"),
-    path('delete/<int:pk>/',delete,name="delete"),
+    path('index/',index,name="index"),
+    path('auth/', auth, name='zoom_auth'),
+    path('auth/complete', index, name='zoom_auth_complete'),
 ]
