@@ -32,6 +32,7 @@ urlpatterns = [
     path('plac7/',include("plac7.urls")),
     path('plac8/',include("plac8.urls")),
     path('plac9/',include("plac9.urls")),
+    path('plac10/',include("plac10.urls")),
 ]
 
 urlpatterns += static(
